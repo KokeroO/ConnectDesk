@@ -38,8 +38,6 @@ const emit = defineEmits(['click', 'action']);
 
 const { t } = useI18n();
 
-const [showActionsDropdown, toggleDropdown] = useToggle();
-
 const categoryMenuItems = [
   {
     label: 'Edit',
