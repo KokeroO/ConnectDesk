@@ -13,8 +13,7 @@ const handleClick = () => {
 
 <template>
   <div
-    class="relative flex w-full gap-3 px-6 py-5 shadow outline-1 outline outline-n-container group/cardLayout rounded-2xl bg-n-solid-2"
-    :class="props.layout === 'col' ? 'flex-col' : 'flex-row'"
+    class="relative flex flex-col w-full gap-3 px-6 py-5 shadow-sm group/cardLayout rounded-2xl bg-n-solid-1"
     @click="handleClick"
   >
     <slot name="header" />

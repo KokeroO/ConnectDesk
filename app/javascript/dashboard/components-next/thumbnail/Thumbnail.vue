@@ -1,7 +1,8 @@
 <script setup>
 import { computed, ref } from 'vue';
-import { useI18n } from 'vue-i18n';
 import { removeEmoji } from 'shared/helpers/emoji';
+
+import FluentIcon from 'shared/components/FluentIcon/DashboardIcon.vue';
 
 const props = defineProps({
   author: {
@@ -29,9 +30,6 @@ const props = defineProps({
     default: '',
   },
 });
-
-const { t } = useI18n();
-
 const hasImageLoaded = ref(false);
 const imgError = ref(false);
 
@@ -56,7 +54,7 @@ const fontSize = computed(() => {
 });
 
 const iconSize = computed(() => {
-  return Math.round(props.size / 1.8);
+  return props.size / 2;
 });
 
 const shouldShowImage = computed(() => {
@@ -74,10 +72,10 @@ const onImgLoad = () => {
 
 <template>
   <div
-    class="flex items-center justify-center rounded-full bg-n-slate-3 dark:bg-n-slate-4"
+    class="flex items-center justify-center rounded-full bg-slate-100 dark:bg-slate-700/50"
     :style="{ width: `${size}px`, height: `${size}px` }"
   >
-    <div v-if="author" class="flex items-center justify-center">
+    <div v-if="author">
       <img
         v-if="shouldShowImage"
         :src="src"
@@ -89,7 +87,7 @@ const onImgLoad = () => {
       <template v-else>
         <span
           v-if="showAuthorName"
-          class="flex items-center justify-center font-medium text-n-slate-11"
+          class="flex items-center justify-center font-medium text-slate-500 dark:text-slate-400"
           :style="{ fontSize: `${fontSize}px` }"
         >
           {{ authorInitial }}
@@ -98,20 +96,26 @@ const onImgLoad = () => {
           v-else
           class="flex items-center justify-center w-full h-full rounded-xl"
         >
-          <span
+          <FluentIcon
             v-if="iconName"
-            :class="`${iconName} text-n-brand/70`"
-            :style="{ width: `${iconSize}px`, height: `${iconSize}px` }"
+            :icon="iconName"
+            icon-lib="lucide"
+            :size="iconSize"
+            class="text-n-brand"
           />
         </div>
       </template>
     </div>
     <div
       v-else
-      v-tooltip.top-start="t('THUMBNAIL.AUTHOR.NOT_AVAILABLE')"
-      class="flex items-center justify-center w-4 h-4 rounded-full bg-n-slate-3 dark:bg-n-slate-4"
+      class="flex items-center justify-center w-4 h-4 rounded-full bg-slate-100 dark:bg-slate-700/50"
     >
-      <span class="i-lucide-user size-2.5 text-n-brand" />
+      <FluentIcon
+        icon="person"
+        type="filled"
+        size="10"
+        class="text-woot-500 dark:text-woot-400"
+      />
     </div>
   </div>
 </template>

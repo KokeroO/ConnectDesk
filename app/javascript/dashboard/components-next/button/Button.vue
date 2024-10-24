@@ -1,6 +1,8 @@
 <script setup>
 import { computed } from 'vue';
+
 import FluentIcon from 'shared/components/FluentIcon/DashboardIcon.vue';
+import Spinner from 'dashboard/components-next/spinner/Spinner.vue';
 
 const props = defineProps({
   label: {
@@ -29,9 +31,18 @@ const props = defineProps({
   size: {
     type: String,
     default: 'default',
-    validator: value => ['default', 'sm', 'lg', 'icon'].includes(value),
+    validator: value => ['default', 'sm', 'lg'].includes(value),
+  },
+  type: {
+    type: String,
+    default: 'button',
+    validator: value => ['button', 'submit', 'reset'].includes(value),
   },
   icon: {
+    type: String,
+    default: '',
+  },
+  emoji: {
     type: String,
     default: '',
   },
@@ -44,65 +55,39 @@ const props = defineProps({
     type: String,
     default: 'fluent',
   },
+  isLoading: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const emit = defineEmits(['click']);
 
-const STYLE_CONFIG = {
-  colors: {
-    blue: {
-      solid: 'bg-n-brand text-white hover:brightness-110 outline-transparent',
-      faded:
-        'bg-n-brand/10 text-n-slate-12 hover:bg-n-brand/20 outline-transparent',
-      outline: 'text-n-blue-text outline-n-blue-border',
-      link: 'text-n-brand hover:underline outline-transparent',
-    },
-    ruby: {
-      solid: 'bg-n-ruby-9 text-white hover:bg-n-ruby-10 outline-transparent',
-      faded:
-        'bg-n-ruby-9/10 text-n-ruby-11 hover:bg-n-ruby-9/20 outline-transparent',
-      outline: 'text-n-ruby-11 hover:bg-n-ruby-9/10 outline-n-ruby-8',
-      link: 'text-n-ruby-9 hover:underline outline-transparent',
-    },
-    amber: {
-      solid: 'bg-n-amber-9 text-white hover:bg-n-amber-10 outline-transparent',
-      faded:
-        'bg-n-amber-9/10 text-n-slate-12 hover:bg-n-amber-9/20 outline-transparent',
-      outline: 'text-n-amber-11 hover:bg-n-amber-9/10 outline-n-amber-9',
-      link: 'text-n-amber-9 hover:underline outline-transparent',
-    },
-    slate: {
-      solid:
-        'bg-n-solid-3 dark:hover:bg-n-solid-2 hover:bg-n-alpha-2 text-n-slate-12 outline-n-container',
-      faded:
-        'bg-n-slate-9/10 text-n-slate-12 hover:bg-n-slate-9/20 outline-transparent',
-      outline: 'text-n-slate-11 outline-n-strong hover:bg-n-slate-9/10',
-      link: 'text-n-slate-11 hover:text-n-slate-12 hover:underline outline-transparent',
-    },
-    teal: {
-      solid: 'bg-n-teal-9 text-white hover:bg-n-teal-10 outline-transparent',
-      faded:
-        'bg-n-teal-9/10 text-n-slate-12 hover:bg-n-teal-9/20 outline-transparent',
-      outline: 'text-n-teal-11 hover:bg-n-teal-9/10 outline-n-teal-9',
-      link: 'text-n-teal-9 hover:underline outline-transparent',
-    },
+const buttonVariants = {
+  variant: {
+    default:
+      'bg-n-brand text-white dark:text-white hover:bg-woot-600 dark:hover:bg-woot-600',
+    destructive: 'bg-n-ruby-9 text-white dark:text-white hover:bg-n-ruby-10',
+    outline:
+      'border border-n-weak dark:border-n-weak hover:border-n-slate-6 dark:hover:border-n-slate-6',
+    secondary: 'bg-n-solid-3 text-n-slate-12 hover:bg-n-solid-2',
+    ghost: 'text-n-slate-12',
+    link: 'text-n-brand underline-offset-4 hover:underline dark:hover:underline',
   },
   size: {
     default: 'h-10 px-4 py-2',
-    sm: 'h-8 px-3',
-    lg: 'h-11 px-4',
-    icon: 'h-auto w-auto px-2',
+    sm: 'h-8 px-3 py-1',
+    lg: 'h-12 px-5 py-3',
   },
   text: {
     default:
-      '!text-woot-500 dark:!text-woot-500 hover:!text-woot-600 dark:hover:!text-woot-600',
+      '!text-n-brand dark:!text-n-brand hover:!text-woot-600 dark:hover:!text-woot-600',
     success:
       '!text-green-500 dark:!text-green-500 hover:!text-green-600 dark:hover:!text-green-600',
     warning:
       '!text-amber-600 dark:!text-amber-600 hover:!text-amber-600 dark:hover:!text-amber-600',
-    danger:
-      '!text-ruby-700 dark:!text-ruby-700 hover:!text-ruby-800 dark:hover:!text-ruby-800',
-    info: '!text-slate-500 dark:!text-slate-400 hover:!text-slate-600 dark:hover:!text-slate-500',
+    danger: '!text-n-ruby-11 hover:!text-n-ruby-10',
+    info: '!text-n-slate-12 hover:!text-n-slate-11',
   },
 };
 
@@ -125,35 +110,43 @@ const iconSize = computed(() => {
   return 18;
 });
 
-const handleClick = () => {
-  emit('click');
+const handleClick = e => {
+  emit('click', e);
 };
 </script>
 
 <template>
   <button
     :class="buttonClasses"
-    class="inline-flex items-center justify-center h-10 min-w-0 gap-2 text-sm font-medium transition-all duration-200 ease-in-out rounded-lg disabled:cursor-not-allowed disabled:pointer-events-none disabled:opacity-50"
+    :type="type"
+    class="inline-flex items-center justify-center min-w-0 gap-2 text-sm font-medium transition-all duration-200 ease-in-out rounded-lg disabled:cursor-not-allowed disabled:pointer-events-none disabled:opacity-50"
     @click="handleClick"
   >
     <FluentIcon
-      v-if="icon && iconPosition === 'left'"
+      v-if="icon && iconPosition === 'left' && !isLoading"
       :icon="icon"
       :size="iconSize"
       :icon-lib="iconLib"
       class="flex-shrink-0"
+      :class="{
+        'text-n-slate-11 dark:text-n-slate-11': variant === 'secondary',
+      }"
     />
-    <slot>
-      <span v-if="label" class="min-w-0 truncate">
-        {{ label }}
-      </span>
-    </slot>
+    <Spinner v-if="isLoading" class="!w-5 !h-5 flex-shrink-0" />
+    <slot name="leftPrefix" />
+    <span v-if="emoji">{{ emoji }}</span>
+    <span v-if="label" class="min-w-0 truncate">{{ label }}</span>
+    <slot />
+    <slot name="rightPrefix" />
     <FluentIcon
       v-if="icon && iconPosition === 'right'"
       :icon="icon"
       :size="iconSize"
       :icon-lib="iconLib"
       class="flex-shrink-0"
+      :class="{
+        'text-n-slate-11 dark:text-n-slate-11': variant === 'secondary',
+      }"
     />
   </button>
 </template>

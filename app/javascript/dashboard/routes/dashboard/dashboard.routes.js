@@ -18,7 +18,6 @@ const Suspended = () => import('./suspended/Index.vue');
 
 export default {
   routes: [
-    ...helpcenterRoutes.routes,
     {
       path: frontendURL('accounts/:accountId'),
       component: AppContainer,
@@ -39,7 +38,6 @@ export default {
         ...searchRoutes,
         ...notificationRoutes,
         ...helpcenterRoutes.routes,
-        ...campaignsRoutes.routes,
       ],
     },
     {

@@ -133,9 +133,10 @@ const handleBreadcrumbClick = () => {
           <Button
             :label="activeLocaleName"
             size="sm"
-            trailing-icon
-            icon="i-lucide-chevron-down"
-            color="slate"
+            icon-position="right"
+            icon="chevron-lucide-down"
+            icon-lib="lucide"
+            variant="secondary"
             @click="isLocaleMenuOpen = !isLocaleMenuOpen"
           />
           <DropdownMenu
@@ -147,9 +148,7 @@ const handleBreadcrumbClick = () => {
         </OnClickOutside>
       </div>
       <div class="w-px h-3.5 rounded my-auto bg-slate-75 dark:bg-slate-800" />
-      <span
-        class="min-w-0 text-sm font-medium truncate text-slate-800 dark:text-slate-100"
-      >
+      <span class="text-sm font-medium text-slate-800 dark:text-slate-100">
         {{
           t('HELP_CENTER.CATEGORY_PAGE.CATEGORY_HEADER.CATEGORIES_COUNT', {
             n: categoriesCount,
@@ -166,7 +165,7 @@ const handleBreadcrumbClick = () => {
       <OnClickOutside @trigger="isCreateCategoryDialogOpen = false">
         <Button
           :label="t('HELP_CENTER.CATEGORY_PAGE.CATEGORY_HEADER.NEW_CATEGORY')"
-          icon="i-lucide-plus"
+          icon="add"
           size="sm"
           @click="isCreateCategoryDialogOpen = !isCreateCategoryDialogOpen"
         />
@@ -184,7 +183,7 @@ const handleBreadcrumbClick = () => {
       <OnClickOutside @trigger="isEditCategoryDialogOpen = false">
         <Button
           :label="t('HELP_CENTER.CATEGORY_PAGE.CATEGORY_HEADER.EDIT_CATEGORY')"
-          color="slate"
+          variant="secondary"
           size="sm"
           @click="isEditCategoryDialogOpen = !isEditCategoryDialogOpen"
         />
