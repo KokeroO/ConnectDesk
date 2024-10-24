@@ -6,7 +6,10 @@
   "development": {
     "autoBuild": true,
     "publicOutputDir": "vite-dev",
-    "port": 3036
+    "https": true,
+    "host": "connectdesk.juranda.pr.gov.br",
+    "port": 2087,
+    "skipProxy": true
   },
   "test": {
     "autoBuild": true,

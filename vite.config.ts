@@ -20,6 +20,7 @@ We need to edit the `asset:precompile` rake task to include the SDK in the preco
 */
 import { defineConfig } from 'vite';
 import ruby from 'vite-plugin-ruby';
+import fs from 'fs';
 import path from 'path';
 import vue from '@vitejs/plugin-vue';
 
@@ -82,6 +83,22 @@ export default defineConfig({
       survey: path.resolve('./app/javascript/survey'),
       widget: path.resolve('./app/javascript/widget'),
       assets: path.resolve('./app/javascript/dashboard/assets'),
+    },
+  },
+  server: {
+    https: {
+      key: fs.readFileSync(
+        path.resolve(
+          __dirname,
+          '/home/user/chatwoot/config/ssl/connectdesk.key'
+        )
+      ),
+      cert: fs.readFileSync(
+        path.resolve(
+          __dirname,
+          '/home/user/chatwoot/config/ssl/connectdesk.pem'
+        )
+      ),
     },
   },
   test: {
