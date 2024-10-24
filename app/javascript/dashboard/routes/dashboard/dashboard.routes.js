@@ -10,6 +10,8 @@ import campaignsRoutes from './campaigns/campaigns.routes';
 
 import { FEATURE_FLAGS } from 'dashboard/featureFlags';
 
+import { FEATURE_FLAGS } from 'dashboard/featureFlags';
+
 const AppContainer = () => import('./Dashboard.vue');
 const Captain = () => import('./Captain.vue');
 const Suspended = () => import('./suspended/Index.vue');

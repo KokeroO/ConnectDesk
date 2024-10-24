@@ -266,14 +266,14 @@ const menuItems = computed(() => {
       icon: 'i-lucide-megaphone',
       children: [
         {
-          name: 'Live chat',
-          label: t('SIDEBAR.LIVE_CHAT'),
-          to: accountScopedRoute('campaigns_livechat_index'),
+          name: 'Ongoing',
+          label: t('SIDEBAR.ONGOING'),
+          to: accountScopedRoute('ongoing_campaigns'),
         },
         {
-          name: 'SMS',
-          label: t('SIDEBAR.SMS'),
-          to: accountScopedRoute('campaigns_sms_index'),
+          name: 'One-off',
+          label: t('SIDEBAR.ONE_OFF'),
+          to: accountScopedRoute('one_off'),
         },
       ],
     },
@@ -281,59 +281,29 @@ const menuItems = computed(() => {
       name: 'Portals',
       label: t('SIDEBAR.HELP_CENTER.TITLE'),
       icon: 'i-lucide-library-big',
-      children: [
-        {
-          name: 'Articles',
-          label: t('SIDEBAR.HELP_CENTER.ARTICLES'),
-          activeOn: [
-            'portals_articles_index',
-            'portals_articles_new',
-            'portals_articles_edit',
-          ],
-          to: accountScopedRoute('portals_index', {
-            navigationPath: 'portals_articles_index',
-          }),
-        },
-        {
-          name: 'Categories',
-          label: t('SIDEBAR.HELP_CENTER.CATEGORIES'),
-          activeOn: [
-            'portals_categories_index',
-            'portals_categories_articles_index',
-            'portals_categories_articles_edit',
-          ],
-          to: accountScopedRoute('portals_index', {
-            navigationPath: 'portals_categories_index',
-          }),
-        },
-        {
-          name: 'Locales',
-          label: t('SIDEBAR.HELP_CENTER.LOCALES'),
-          activeOn: ['portals_locales_index'],
-          to: accountScopedRoute('portals_index', {
-            navigationPath: 'portals_locales_index',
-          }),
-        },
-        {
-          name: 'Settings',
-          label: t('SIDEBAR.HELP_CENTER.SETTINGS'),
-          activeOn: ['portals_settings_index'],
-          to: accountScopedRoute('portals_index', {
-            navigationPath: 'portals_settings_index',
-          }),
-        },
-      ],
+      to: accountScopedRoute('default_portal_articles'),
       activeOn: [
-        'portals_new',
-        'portals_index',
-        'portals_articles_index',
-        'portals_articles_new',
-        'portals_articles_edit',
-        'portals_categories_index',
-        'portals_categories_articles_index',
-        'portals_categories_articles_edit',
-        'portals_locales_index',
-        'portals_settings_index',
+        'all_locale_categories',
+        'default_portal_articles',
+        'edit_article',
+        'edit_category',
+        'edit_portal_customization',
+        'edit_portal_information',
+        'edit_portal_locales',
+        'list_all_locale_articles',
+        'list_all_locale_categories',
+        'list_all_portals',
+        'list_archived_articles',
+        'list_draft_articles',
+        'list_mine_articles',
+        'new_article',
+        'new_category_in_locale',
+        'new_portal_information',
+        'portalSlug',
+        'portal_customization',
+        'portal_finish',
+        'show_category',
+        'show_category_articles',
       ],
     },
     {
@@ -439,46 +409,46 @@ const menuItems = computed(() => {
 
 <template>
   <aside
-    class="w-[200px] bg-n-solid-2 rtl:border-l ltr:border-r border-n-weak h-screen flex flex-col text-sm pb-1"
+    class="w-[200px] bg-n-solid-2 rtl:border-l ltr:border-r border-n-weak h-screen flex flex-col text-sm pt-2 pb-1"
   >
     <section class="grid gap-2 mt-2 mb-4">
-      <div class="flex items-center min-w-0 gap-2 px-2">
-        <div class="grid flex-shrink-0 size-6 place-content-center">
+      <div class="flex gap-2 px-2 items-center min-w-0">
+        <div class="size-6 grid place-content-center flex-shrink-0">
           <Logo />
         </div>
-        <div class="flex-shrink-0 w-px h-3 bg-n-strong" />
+        <div class="w-px h-3 bg-n-strong flex-shrink-0" />
         <SidebarAccountSwitcher
-          class="flex-grow min-w-0 -mx-1"
+          class="-mx-1 flex-grow min-w-0"
           @show-create-account-modal="emit('showCreateAccountModal')"
         />
       </div>
-      <div class="flex gap-2 px-2">
+      <div class="gap-2 flex px-2">
         <RouterLink
           :to="{ name: 'search' }"
-          class="flex items-center w-full gap-2 px-2 py-1 border rounded-lg border-n-weak bg-n-solid-3 dark:bg-n-black/30"
+          class="rounded-lg py-1 flex items-center gap-2 px-2 border-n-weak border bg-n-solid-3 dark:bg-n-black/30 w-full"
         >
-          <span class="flex-shrink-0 i-lucide-search size-4 text-n-slate-11" />
+          <span class="i-lucide-search size-4 text-n-slate-11 flex-shrink-0" />
           <span class="flex-grow text-left">
             {{ t('COMBOBOX.SEARCH_PLACEHOLDER') }}
           </span>
           <span
-            class="hidden tracking-wide pointer-events-none select-none text-n-slate-10"
+            class="tracking-wide select-none pointer-events-none text-n-slate-10 hidden"
           >
             {{ searchShortcut }}
           </span>
         </RouterLink>
         <button
           v-if="enableNewConversation"
-          class="flex items-center w-full gap-2 px-2 py-1 border rounded-lg border-n-weak bg-n-solid-3"
+          class="rounded-lg py-1 flex items-center gap-2 px-2 border-n-weak border bg-n-solid-3 w-full"
         >
           <span
-            class="flex-shrink-0 i-lucide-square-pen size-4 text-n-slate-11"
+            class="i-lucide-square-pen size-4 text-n-slate-11 flex-shrink-0"
           />
         </button>
       </div>
     </section>
-    <nav class="grid flex-grow gap-2 px-2 pb-5 overflow-y-scroll no-scrollbar">
-      <ul class="flex flex-col gap-2 m-0 list-none">
+    <nav class="grid gap-2 overflow-y-scroll no-scrollbar px-2 flex-grow pb-5">
+      <ul class="flex flex-col gap-2 list-none m-0">
         <SidebarGroup
           v-for="item in menuItems"
           :key="item.name"
@@ -487,13 +457,13 @@ const menuItems = computed(() => {
       </ul>
     </nav>
     <section
-      class="p-1 border-t border-n-weak shadow-[0px_-2px_4px_0px_rgba(27,28,29,0.02)] flex-shrink-0 flex justify-between gap-2 items-center"
+      class="p-1 border-t border-n-strong shadow-[0px_-2px_4px_0px_rgba(27,28,29,0.02)] flex-shrink-0 flex justify-between gap-2 items-center"
     >
       <SidebarProfileMenu
         @open-key-shortcut-modal="emit('openKeyShortcutModal')"
       />
       <div v-if="false" class="flex items-center">
-        <div class="flex-shrink-0 w-px h-3 bg-n-strong" />
+        <div class="w-px h-3 bg-n-strong flex-shrink-0" />
         <SidebarNotificationBell
           @open-notification-panel="emit('openNotificationPanel')"
         />
