@@ -1,6 +1,13 @@
 <script setup>
+<<<<<<< HEAD
 import { ref } from 'vue';
 import { OnClickOutside } from '@vueuse/components';
+=======
+import { computed } from 'vue';
+import { useI18n } from 'vue-i18n';
+import { useToggle } from '@vueuse/core';
+import { LOCALE_MENU_ITEMS } from 'dashboard/helper/portalHelper';
+>>>>>>> aa57431c4 (fix: Dropdown menu issues (#10364))
 
 import CardLayout from 'dashboard/components-next/CardLayout.vue';
 import Button from 'dashboard/components-next/button/Button.vue';
@@ -40,9 +47,25 @@ const menuItems = [
   },
 ];
 
+<<<<<<< HEAD
 // eslint-disable-next-line no-unused-vars
 const handleAction = action => {
   // TODO: Implement action
+=======
+const [showDropdownMenu, toggleDropdown] = useToggle();
+
+const localeMenuItems = computed(() =>
+  LOCALE_MENU_ITEMS.map(item => ({
+    ...item,
+    label: t(item.label),
+    disabled: props.isDefault,
+  }))
+);
+
+const handleAction = ({ action, value }) => {
+  emit('action', { action, value });
+  toggleDropdown(false);
+>>>>>>> aa57431c4 (fix: Dropdown menu issues (#10364))
 };
 </script>
 
@@ -79,6 +102,7 @@ const handleAction = action => {
               {{ categoryCount }} categories
             </span>
           </div>
+<<<<<<< HEAD
           <div class="relative group">
             <Button
               variant="ghost"
@@ -95,6 +119,26 @@ const handleAction = action => {
                 @action="handleAction"
               />
             </OnClickOutside>
+=======
+          <div
+            v-on-clickaway="() => toggleDropdown(false)"
+            class="relative group"
+          >
+            <Button
+              icon="i-lucide-ellipsis-vertical"
+              color="slate"
+              size="xs"
+              class="rounded-md group-hover:bg-n-alpha-2"
+              @click="toggleDropdown()"
+            />
+
+            <DropdownMenu
+              v-if="showDropdownMenu"
+              :menu-items="localeMenuItems"
+              class="ltr:right-0 rtl:left-0 mt-1 xl:ltr:left-0 xl:rtl:right-0 top-full z-60 min-w-[150px]"
+              @action="handleAction"
+            />
+>>>>>>> aa57431c4 (fix: Dropdown menu issues (#10364))
           </div>
         </div>
       </div>

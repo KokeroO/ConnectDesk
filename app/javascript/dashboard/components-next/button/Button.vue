@@ -48,6 +48,7 @@ const props = defineProps({
 
 const emit = defineEmits(['click']);
 
+<<<<<<< HEAD
 const buttonVariants = {
   variant: {
     default:
@@ -61,6 +62,46 @@ const buttonVariants = {
     ghost:
       'text-slate-900 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800',
     link: 'text-woot-500 underline-offset-4 hover:underline dark:hover:underline',
+=======
+const STYLE_CONFIG = {
+  colors: {
+    blue: {
+      solid: 'bg-n-brand text-white hover:brightness-110 outline-transparent',
+      faded:
+        'bg-n-brand/10 text-n-slate-12 hover:bg-n-brand/20 outline-transparent',
+      outline: 'text-n-blue-text hover:bg-n-brand/10 outline-n-blue-border',
+      link: 'text-n-brand hover:underline outline-transparent',
+    },
+    ruby: {
+      solid: 'bg-n-ruby-9 text-white hover:bg-n-ruby-10 outline-transparent',
+      faded:
+        'bg-n-ruby-9/10 text-n-slate-12 hover:bg-n-ruby-9/20 outline-transparent',
+      outline: 'text-n-ruby-11 hover:bg-n-ruby-9/10 outline-n-ruby-9',
+      link: 'text-n-ruby-9 hover:underline outline-transparent',
+    },
+    amber: {
+      solid: 'bg-n-amber-9 text-white hover:bg-n-amber-10 outline-transparent',
+      faded:
+        'bg-n-amber-9/10 text-n-slate-12 hover:bg-n-amber-9/20 outline-transparent',
+      outline: 'text-n-amber-11 hover:bg-n-amber-9/10 outline-n-amber-9',
+      link: 'text-n-amber-9 hover:underline outline-transparent',
+    },
+    slate: {
+      solid:
+        'bg-n-solid-3 dark:hover:bg-n-solid-2 hover:bg-n-alpha-2 text-n-slate-12 outline-n-container',
+      faded:
+        'bg-n-slate-9/10 text-n-slate-12 hover:bg-n-slate-9/20 outline-transparent',
+      outline: 'text-n-slate-11 outline-n-strong hover:bg-n-slate-9/10',
+      link: 'text-n-slate-11 hover:text-n-slate-12 hover:underline outline-transparent',
+    },
+    teal: {
+      solid: 'bg-n-teal-9 text-white hover:bg-n-teal-10 outline-transparent',
+      faded:
+        'bg-n-teal-9/10 text-n-slate-12 hover:bg-n-teal-9/20 outline-transparent',
+      outline: 'text-n-teal-11 hover:bg-n-teal-9/10 outline-n-teal-9',
+      link: 'text-n-teal-9 hover:underline outline-transparent',
+    },
+>>>>>>> aa57431c4 (fix: Dropdown menu issues (#10364))
   },
   size: {
     default: 'h-10 px-4 py-2',

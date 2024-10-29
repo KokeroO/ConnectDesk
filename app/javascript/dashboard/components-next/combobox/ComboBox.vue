@@ -95,6 +95,7 @@ onClickOutside(comboboxRef, () => {
       'group/combobox': !disabled,
     }"
   >
+<<<<<<< HEAD
     <Button
       variant="outline"
       :label="selectedLabel"
@@ -123,6 +124,64 @@ onClickOutside(comboboxRef, () => {
           :placeholder="searchPlaceholder || t('COMBOBOX.SEARCH_PLACEHOLDER')"
           class="w-full py-2 pl-10 pr-2 text-sm bg-white border-none rounded-t-md dark:bg-slate-900 text-slate-900 dark:text-slate-50"
         />
+=======
+    <OnClickOutside @trigger="open = false">
+      <Button
+        variant="outline"
+        color="slate"
+        :label="selectedLabel"
+        trailing-icon
+        :disabled="disabled"
+        class="justify-between w-full !px-3 !py-2.5 text-n-slate-12 font-normal group-hover/combobox:border-n-slate-6"
+        :icon="open ? 'i-lucide-chevron-up' : 'i-lucide-chevron-down'"
+        @click="toggleDropdown"
+      />
+      <div
+        v-show="open"
+        class="absolute z-50 w-full mt-1 transition-opacity duration-200 border rounded-md shadow-lg bg-n-solid-1 border-n-strong"
+      >
+        <div class="relative border-b border-n-strong">
+          <span class="absolute i-lucide-search top-2.5 size-4 left-3" />
+          <input
+            ref="searchInput"
+            v-model="search"
+            type="search"
+            :placeholder="searchPlaceholder || t('COMBOBOX.SEARCH_PLACEHOLDER')"
+            class="w-full py-2 pl-10 pr-2 text-sm border-none rounded-t-md bg-n-solid-1 text-slate-900 dark:text-slate-50"
+          />
+        </div>
+        <ul
+          class="py-1 mb-0 overflow-auto max-h-60"
+          role="listbox"
+          :aria-activedescendant="selectedValue"
+        >
+          <li
+            v-for="option in filteredOptions"
+            :key="option.value"
+            class="flex items-center justify-between !text-n-slate-12 w-full gap-2 px-3 py-2 text-sm transition-colors duration-150 cursor-pointer hover:bg-n-alpha-2"
+            :class="{
+              'bg-n-alpha-2': option.value === selectedValue,
+            }"
+            role="option"
+            :aria-selected="option.value === selectedValue"
+            @click="selectOption(option)"
+          >
+            <span :class="{ 'font-medium': option.value === selectedValue }">
+              {{ option.label }}
+            </span>
+            <span
+              v-if="option.value === selectedValue"
+              class="flex-shrink-0 i-lucide-check size-4 text-n-slate-11"
+            />
+          </li>
+          <li
+            v-if="filteredOptions.length === 0"
+            class="px-3 py-2 text-sm text-slate-600 dark:text-slate-300"
+          >
+            {{ emptyState || t('COMBOBOX.EMPTY_STATE') }}
+          </li>
+        </ul>
+>>>>>>> aa57431c4 (fix: Dropdown menu issues (#10364))
       </div>
       <ul
         class="py-1 overflow-auto max-h-60"

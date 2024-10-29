@@ -1,6 +1,18 @@
 <script setup>
+<<<<<<< HEAD
 import { computed, ref } from 'vue';
 import { OnClickOutside } from '@vueuse/components';
+=======
+import { computed } from 'vue';
+import { useToggle } from '@vueuse/core';
+import { useI18n } from 'vue-i18n';
+import { dynamicTime } from 'shared/helpers/timeHelper';
+import {
+  ARTICLE_MENU_ITEMS,
+  ARTICLE_MENU_OPTIONS,
+  ARTICLE_STATUSES,
+} from 'dashboard/helper/portalHelper';
+>>>>>>> aa57431c4 (fix: Dropdown menu issues (#10364))
 
 import CardLayout from 'dashboard/components-next/CardLayout.vue';
 import DropdownMenu from 'dashboard/components-next/dropdown-menu/DropdownMenu.vue';
@@ -34,7 +46,15 @@ const props = defineProps({
   },
 });
 
+<<<<<<< HEAD
 const isOpen = ref(false);
+=======
+const emit = defineEmits(['openArticle', 'articleAction']);
+
+const { t } = useI18n();
+
+const [showActionsDropdown, toggleDropdown] = useToggle();
+>>>>>>> aa57431c4 (fix: Dropdown menu issues (#10364))
 
 const menuItems = computed(() => {
   const baseItems = [{ label: 'Delete', action: 'delete', icon: 'delete' }];
@@ -78,8 +98,39 @@ const statusText = computed(() => {
   }
 });
 
+<<<<<<< HEAD
 const handleAction = () => {
   isOpen.value = false;
+=======
+const categoryName = computed(() => {
+  if (props.category?.slug) {
+    return `${props.category.icon} ${props.category.name}`;
+  }
+  return t(
+    'HELP_CENTER.ARTICLES_PAGE.ARTICLE_CARD.CARD.CATEGORY.UNCATEGORISED'
+  );
+});
+
+const authorName = computed(() => {
+  return props.author?.name || props.author?.availableName || '-';
+});
+
+const authorThumbnailSrc = computed(() => {
+  return props.author?.thumbnail;
+});
+
+const lastUpdatedAt = computed(() => {
+  return dynamicTime(props.updatedAt);
+});
+
+const handleArticleAction = ({ action, value }) => {
+  toggleDropdown(false);
+  emit('articleAction', { action, value, id: props.id });
+};
+
+const handleClick = id => {
+  emit('openArticle', id);
+>>>>>>> aa57431c4 (fix: Dropdown menu issues (#10364))
 };
 </script>
 
@@ -99,6 +150,7 @@ const handleAction = () => {
             class="text-xs bg-slate-50 !font-normal group-hover:bg-slate-100/50 dark:group-hover:bg-slate-700/50 !h-6 dark:bg-slate-800 rounded-md border-0 !px-2 !py-0.5"
             :label="statusText"
             :class="statusTextColor"
+<<<<<<< HEAD
             @click="isOpen = !isOpen"
           />
           <OnClickOutside @trigger="isOpen = false">
@@ -107,6 +159,27 @@ const handleAction = () => {
               :menu-items="menuItems"
               class="right-0 mt-2 xl:left-0 top-full"
               @action="handleAction"
+=======
+          >
+            {{ statusText }}
+          </span>
+          <div
+            v-on-clickaway="() => toggleDropdown(false)"
+            class="relative flex items-center group"
+          >
+            <Button
+              icon="i-lucide-ellipsis-vertical"
+              color="slate"
+              size="xs"
+              class="rounded-md group-hover:bg-n-alpha-2"
+              @click="toggleDropdown()"
+            />
+            <DropdownMenu
+              v-if="showActionsDropdown"
+              :menu-items="articleMenuItems"
+              class="mt-1 ltr:right-0 rtl:left-0 xl:ltr:left-0 xl:rtl:right-0 top-full"
+              @action="handleArticleAction($event)"
+>>>>>>> aa57431c4 (fix: Dropdown menu issues (#10364))
             />
           </OnClickOutside>
         </div>

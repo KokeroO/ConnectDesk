@@ -47,9 +47,28 @@ const handlePortalChange = id => {
   >
     <div class="flex items-center justify-between gap-4 px-6 pb-2">
       <div class="flex flex-col gap-1">
+<<<<<<< HEAD
         <h2 class="text-base font-medium text-slate-900 dark:text-slate-50">
           {{ header }}
         </h2>
+=======
+        <div class="flex items-center gap-2">
+          <h2
+            class="text-base font-medium cursor-pointer text-slate-900 dark:text-slate-50 w-fit hover:underline"
+            @click="redirectToPortalHomePage"
+          >
+            {{ t('HELP_CENTER.PORTAL_SWITCHER.PORTALS') }}
+          </h2>
+          <Button
+            icon="i-lucide-arrow-up-right"
+            variant="ghost"
+            icon-lib="lucide"
+            size="sm"
+            class="!w-6 !h-6 hover:bg-n-slate-2 text-n-slate-11 !p-0.5 rounded-md"
+            @click="onClickPreviewPortal"
+          />
+        </div>
+>>>>>>> aa57431c4 (fix: Dropdown menu issues (#10364))
         <p class="text-sm text-slate-600 dark:text-slate-300">
           {{ description }}
         </p>
