@@ -2,5 +2,5 @@ FROM chatwoot:development
 
 RUN chmod +x docker/entrypoints/vite.sh
 
-EXPOSE 5173
-CMD ["pnpm", "run", "dev"]
+EXPOSE 3036
+CMD ["bin/vite", "dev"]
