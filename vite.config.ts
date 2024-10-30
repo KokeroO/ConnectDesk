@@ -100,6 +100,10 @@ export default defineConfig({
         )
       ),
     },
+    watch: {
+      ignored: ['**/node_modules/**', '**/dist/**'], // Ignora node_modules e dist
+      interval: 2000, // Define o intervalo de observação para economizar recursos
+    },
   },
   test: {
     environment: 'jsdom',

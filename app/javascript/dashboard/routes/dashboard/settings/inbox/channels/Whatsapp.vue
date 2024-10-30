@@ -3,6 +3,7 @@ import PageHeader from '../../SettingsSubPageHeader.vue';
 import Twilio from './Twilio.vue';
 import ThreeSixtyDialogWhatsapp from './360DialogWhatsapp.vue';
 import CloudWhatsapp from './CloudWhatsapp.vue';
+import BaileysEvolution from './BaileysEvolution.vue';
 
 export default {
   components: {
@@ -10,6 +11,7 @@ export default {
     Twilio,
     ThreeSixtyDialogWhatsapp,
     CloudWhatsapp,
+    BaileysEvolution,
   },
   data() {
     return {
@@ -37,10 +39,14 @@ export default {
           <option value="twilio">
             {{ $t('INBOX_MGMT.ADD.WHATSAPP.PROVIDERS.TWILIO') }}
           </option>
+          <option value="baileys_evolution">
+            {{ $t('INBOX_MGMT.ADD.WHATSAPP.PROVIDERS.BAILEYS_EVOLUTION') }}
+          </option>
         </select>
       </label>
     </div>
 
+    <BaileysEvolution v-if="provider === 'baileys_evolution'" type="whatsapp" />
     <Twilio v-if="provider === 'twilio'" type="whatsapp" />
     <ThreeSixtyDialogWhatsapp v-else-if="provider === '360dialog'" />
     <CloudWhatsapp v-else />

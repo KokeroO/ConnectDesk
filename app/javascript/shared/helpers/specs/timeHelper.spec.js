@@ -19,10 +19,12 @@ afterEach(() => {
 
 describe('#messageStamp', () => {
   it('returns correct value', () => {
-    expect(messageStamp(1612971343)).toEqual('3:35 PM');
-    expect(messageStamp(1612971343, 'LLL d, h:mm a')).toEqual(
-      'Feb 10, 3:35 PM'
+    expect(messageStamp(1612971343, false, this.$root.$i18n.locale)).toEqual(
+      '3:35 PM'
     );
+    expect(
+      messageStamp(1612971343, 'fullDateTime', this.$root.$i18n.locale)
+    ).toEqual('Feb 10, 3:35 PM');
   });
 });
 
@@ -38,14 +40,16 @@ describe('#messageTimestamp', () => {
 describe('#dynamicTime', () => {
   it('returns correct value', () => {
     Date.now = vi.fn(() => new Date(Date.UTC(2023, 1, 14)).valueOf());
-    expect(dynamicTime(1612971343)).toEqual('about 2 years ago');
+    expect(dynamicTime(1612971343, this.$root.$i18n.locale)).toEqual(
+      'about 2 years ago'
+    );
   });
 });
 
 describe('#dateFormat', () => {
   it('returns correct value', () => {
-    expect(dateFormat(1612971343)).toEqual('Feb 10, 2021');
-    expect(dateFormat(1612971343, 'LLL d, yyyy')).toEqual('Feb 10, 2021');
+    expect(dateFormat(1612971343, 'standard')).toEqual('Feb 10, 2021');
+    expect(dateFormat(1612971343, 'standard')).toEqual('Feb 10, 2021');
   });
 });
 

@@ -1,6 +1,6 @@
 import './design-system/histoire.scss';
 import { defineSetupVue3 } from '@histoire/plugin-vue';
-import i18nMessages from 'dashboard/i18n';
+import i18nMessages from './dashboard/i18n';
 import { createI18n } from 'vue-i18n';
 
 const i18n = createI18n({

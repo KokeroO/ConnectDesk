@@ -101,6 +101,7 @@ app.directive('on-clickaway', onClickaway);
 
 // load common helpers into js
 commonHelpers();
+
 window.WOOT_STORE = store;
 window.WootConstants = constants;
 window.axios = createAxios(axios);

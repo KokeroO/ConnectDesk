@@ -9,6 +9,7 @@ module SwitchLocale
     locale ||= locale_from_custom_domain
     # if locale is not set in account, let's use DEFAULT_LOCALE env variable
     locale ||= locale_from_env_variable
+    Rails.logger.info { "switch_locale: #{locale.inspect}" }
     set_locale(locale, &)
   end
 

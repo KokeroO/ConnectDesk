@@ -5,7 +5,7 @@ import FloatingVue from 'floating-vue';
 
 const i18n = createI18n({
   legacy: false,
-  locale: 'pt_BR',
+  locale: 'pt-BR',
   messages: i18nMessages,
 });
 

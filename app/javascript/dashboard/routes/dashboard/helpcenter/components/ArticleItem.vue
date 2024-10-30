@@ -47,7 +47,7 @@ export default {
 
   computed: {
     lastUpdatedAt() {
-      return dynamicTime(this.updatedAt);
+      return dynamicTime(this.updatedAt, this.$root.$i18n.locale);
     },
     formattedViewCount() {
       return Number(this.views || 0).toLocaleString('en');

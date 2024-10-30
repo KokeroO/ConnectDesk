@@ -159,6 +159,24 @@
           "ERROR_MESSAGE": "Não fomos capazes de autenticar as credenciais Twilio, por favor, tente novamente"
         }
       },
+      "BAILEYS_EVOLUTION": {
+        "TITLE": "Canal do WhatsApp",
+        "DESC": "Acesse o Whattsap através da API Baileys.",
+        "CHANNEL_NAME": {
+          "LABEL": "Nome da Caixa de Entrada",
+          "PLACEHOLDER": "Por favor, digite um nome para caixa de entrada",
+          "ERROR": "Este campo é obrigatório"
+        },
+        "PHONE_NUMBER": {
+          "LABEL": "Número de Telefone",
+          "PLACEHOLDER": "Por favor, insira o número de telefone do qual a mensagem será enviada.",
+          "ERROR": "Por favor, forneça um número de telefone válido que comece com o símbolo \"+\" e não contenha espaços."
+        },
+        "SUBMIT_BUTTON": "Criar canal do WhatsApp",
+        "API": {
+          "ERROR_MESSAGE": "Não fomos capazes de criar a instancia, por favor, tente novamente"
+        }
+      },
       "SMS": {
         "TITLE": "Canal SMS",
         "DESC": "Comece a apoiar seus clientes via SMS.",
@@ -218,7 +236,8 @@
           "LABEL": "Provedor de API",
           "TWILIO": "Twilio",
           "WHATSAPP_CLOUD": "Cloud do WhatsApp",
-          "360_DIALOG": "360Dialog"
+          "360_DIALOG": "360Dialog",
+          "BAILEYS_EVOLUTION": "Baileys"
         },
         "INBOX_NAME": {
           "LABEL": "Nome da Caixa de Entrada",
