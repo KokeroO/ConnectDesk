@@ -25,7 +25,6 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     tzdata \
     postgresql-client \
     libpq-dev \
-    yarn \
     git \
     imagemagick \
     tmux \
@@ -34,17 +33,16 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     npm \
     libyaml-dev
 
-# Install rbenv and ruby
-RUN git clone https://github.com/rbenv/rbenv.git ~/.rbenv \
-    &&  echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc \
-    &&  echo 'eval "$(rbenv init -)"' >> ~/.bashrc
-ENV PATH "/root/.rbenv/bin/:/root/.rbenv/shims/:$PATH"
-RUN git clone https://github.com/rbenv/ruby-build.git && \
-    PREFIX=/usr/local ./ruby-build/install.sh
-
-RUN rbenv install $RUBY_VERSION && \
-    rbenv global $RUBY_VERSION && \
-    rbenv versions
+# Install pnpm and configure environment
+RUN wget -qO- https://get.pnpm.io/install.sh | ENV="$HOME/.shrc" SHELL="$(which sh)" sh - \
+&& echo 'export PNPM_HOME="/root/.local/share/pnpm"' >> /root/.shrc \
+&& echo 'export PATH="$PNPM_HOME:$PATH"' >> /root/.shrc \
+&& export PNPM_HOME="/root/.local/share/pnpm" \
+&& export PATH="$PNPM_HOME:$PATH" \
+&& pnpm --version
+# Persist the environment variables in Docker
+ENV PNPM_HOME="/root/.local/share/pnpm"
+ENV PATH="$PNPM_HOME:$PATH"
 
 # Install overmind
 RUN curl -L https://github.com/DarthSim/overmind/releases/download/v2.1.0/overmind-v2.1.0-linux-amd64.gz > overmind.gz \
@@ -64,12 +62,23 @@ RUN curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | s
 WORKDIR /workspace
 COPY . /workspace
 
-# set up ruby
+# Install rvm
+RUN gpg --keyserver hkp://keyserver.ubuntu.com --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB \
+    && gpg2 --keyserver hkp://keyserver.ubuntu.com --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB \
+    && curl -sSL https://get.rvm.io | bash -s stablee && \
+    echo "source $HOME/.rvm/scripts/rvm" >> ~/.bashrc
+
+# install and set up ruby
 COPY Gemfile Gemfile.lock ./
-RUN gem install bundler && bundle install
+
+RUN bash -l -c "source $HOME/.rvm/scripts/rvm && \
+    rvm install ruby-$RUBY_VERSION && \
+    rvm --default use ruby-$RUBY_VERSION && \
+    gem install bundler && bundle install"
 
 # set up node js
 RUN npm install n -g && \
     n $NODE_VERSION
-RUN npm install --global yarn
-RUN yarn
+    
+COPY package.json pnpm-lock.yaml ./
+RUN pnpm i
