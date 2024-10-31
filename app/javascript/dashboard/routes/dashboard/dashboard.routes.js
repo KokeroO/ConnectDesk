@@ -10,8 +10,6 @@ import campaignsRoutes from './campaigns/campaigns.routes';
 
 import { FEATURE_FLAGS } from 'dashboard/featureFlags';
 
-import { FEATURE_FLAGS } from 'dashboard/featureFlags';
-
 import AppContainer from './Dashboard.vue';
 import Captain from './Captain.vue';
 import Suspended from './suspended/Index.vue';
@@ -38,6 +36,7 @@ export default {
         ...searchRoutes,
         ...notificationRoutes,
         ...helpcenterRoutes.routes,
+        ...campaignsRoutes.routes,
       ],
     },
     {
