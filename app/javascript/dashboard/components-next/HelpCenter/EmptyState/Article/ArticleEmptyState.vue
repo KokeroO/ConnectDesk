@@ -58,7 +58,7 @@ const articles = [
     subtitle="Write a rich article, let's get started!"
   >
     <template #empty-state-item>
-      <div class="grid grid-cols-1 gap-4">
+      <div class="grid grid-cols-1 gap-4 p-px overflow-hidden">
         <ArticleCard
           v-for="(article, index) in articles"
           :key="`article-${index}`"
