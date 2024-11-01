@@ -48,21 +48,6 @@ const props = defineProps({
 
 const emit = defineEmits(['click']);
 
-<<<<<<< HEAD
-const buttonVariants = {
-  variant: {
-    default:
-      'bg-woot-500 dark:bg-woot-500 text-white dark:text-white hover:bg-woot-600 dark:hover:bg-woot-600',
-    destructive:
-      'bg-ruby-700 dark:bg-ruby-700 text-white dark:text-white hover:bg-ruby-800 dark:hover:bg-ruby-800',
-    outline:
-      'border border-slate-200 dark:border-slate-700/50 hover:border-slate-300 dark:hover:border-slate-600',
-    secondary:
-      'bg-slate-50 text-slate-900 dark:bg-slate-700/50 dark:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-600',
-    ghost:
-      'text-slate-900 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800',
-    link: 'text-woot-500 underline-offset-4 hover:underline dark:hover:underline',
-=======
 const STYLE_CONFIG = {
   colors: {
     blue: {
@@ -101,7 +86,6 @@ const STYLE_CONFIG = {
       outline: 'text-n-teal-11 hover:bg-n-teal-9/10 outline-n-teal-9',
       link: 'text-n-teal-9 hover:underline outline-transparent',
     },
->>>>>>> aa57431c4 (fix: Dropdown menu issues (#10364))
   },
   size: {
     default: 'h-10 px-4 py-2',

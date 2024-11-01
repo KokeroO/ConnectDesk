@@ -47,11 +47,6 @@ const handlePortalChange = id => {
   >
     <div class="flex items-center justify-between gap-4 px-6 pb-2">
       <div class="flex flex-col gap-1">
-<<<<<<< HEAD
-        <h2 class="text-base font-medium text-slate-900 dark:text-slate-50">
-          {{ header }}
-        </h2>
-=======
         <div class="flex items-center gap-2">
           <h2
             class="text-base font-medium cursor-pointer text-slate-900 dark:text-slate-50 w-fit hover:underline"
@@ -68,7 +63,6 @@ const handlePortalChange = id => {
             @click="onClickPreviewPortal"
           />
         </div>
->>>>>>> aa57431c4 (fix: Dropdown menu issues (#10364))
         <p class="text-sm text-slate-600 dark:text-slate-300">
           {{ description }}
         </p>

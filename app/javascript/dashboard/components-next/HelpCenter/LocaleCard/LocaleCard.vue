@@ -1,13 +1,8 @@
 <script setup>
-<<<<<<< HEAD
-import { ref } from 'vue';
-import { OnClickOutside } from '@vueuse/components';
-=======
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useToggle } from '@vueuse/core';
 import { LOCALE_MENU_ITEMS } from 'dashboard/helper/portalHelper';
->>>>>>> aa57431c4 (fix: Dropdown menu issues (#10364))
 
 import CardLayout from 'dashboard/components-next/CardLayout.vue';
 import Button from 'dashboard/components-next/button/Button.vue';
@@ -47,11 +42,6 @@ const menuItems = [
   },
 ];
 
-<<<<<<< HEAD
-// eslint-disable-next-line no-unused-vars
-const handleAction = action => {
-  // TODO: Implement action
-=======
 const [showDropdownMenu, toggleDropdown] = useToggle();
 
 const localeMenuItems = computed(() =>
@@ -65,7 +55,6 @@ const localeMenuItems = computed(() =>
 const handleAction = ({ action, value }) => {
   emit('action', { action, value });
   toggleDropdown(false);
->>>>>>> aa57431c4 (fix: Dropdown menu issues (#10364))
 };
 </script>
 
@@ -102,24 +91,6 @@ const handleAction = ({ action, value }) => {
               {{ categoryCount }} categories
             </span>
           </div>
-<<<<<<< HEAD
-          <div class="relative group">
-            <Button
-              variant="ghost"
-              size="icon"
-              icon="more-vertical"
-              class="w-8 group-hover:bg-slate-100 dark:group-hover:bg-slate-800"
-              @click="isOpen = !isOpen"
-            />
-            <OnClickOutside @trigger="isOpen = false">
-              <DropdownMenu
-                v-if="isOpen"
-                :menu-items="menuItems"
-                class="right-0 mt-1 xl:left-0 top-full z-60 min-w-[147px]"
-                @action="handleAction"
-              />
-            </OnClickOutside>
-=======
           <div
             v-on-clickaway="() => toggleDropdown(false)"
             class="relative group"
@@ -138,7 +109,6 @@ const handleAction = ({ action, value }) => {
               class="ltr:right-0 rtl:left-0 mt-1 xl:ltr:left-0 xl:rtl:right-0 top-full z-60 min-w-[150px]"
               @action="handleAction"
             />
->>>>>>> aa57431c4 (fix: Dropdown menu issues (#10364))
           </div>
         </div>
       </div>

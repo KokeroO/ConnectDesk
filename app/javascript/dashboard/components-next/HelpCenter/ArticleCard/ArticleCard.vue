@@ -1,8 +1,4 @@
 <script setup>
-<<<<<<< HEAD
-import { computed, ref } from 'vue';
-import { OnClickOutside } from '@vueuse/components';
-=======
 import { computed } from 'vue';
 import { useToggle } from '@vueuse/core';
 import { useI18n } from 'vue-i18n';
@@ -12,7 +8,6 @@ import {
   ARTICLE_MENU_OPTIONS,
   ARTICLE_STATUSES,
 } from 'dashboard/helper/portalHelper';
->>>>>>> aa57431c4 (fix: Dropdown menu issues (#10364))
 
 import CardLayout from 'dashboard/components-next/CardLayout.vue';
 import DropdownMenu from 'dashboard/components-next/dropdown-menu/DropdownMenu.vue';
@@ -46,15 +41,11 @@ const props = defineProps({
   },
 });
 
-<<<<<<< HEAD
-const isOpen = ref(false);
-=======
 const emit = defineEmits(['openArticle', 'articleAction']);
 
 const { t } = useI18n();
 
 const [showActionsDropdown, toggleDropdown] = useToggle();
->>>>>>> aa57431c4 (fix: Dropdown menu issues (#10364))
 
 const menuItems = computed(() => {
   const baseItems = [{ label: 'Delete', action: 'delete', icon: 'delete' }];
@@ -98,10 +89,6 @@ const statusText = computed(() => {
   }
 });
 
-<<<<<<< HEAD
-const handleAction = () => {
-  isOpen.value = false;
-=======
 const categoryName = computed(() => {
   if (props.category?.slug) {
     return `${props.category.icon} ${props.category.name}`;
@@ -130,7 +117,6 @@ const handleArticleAction = ({ action, value }) => {
 
 const handleClick = id => {
   emit('openArticle', id);
->>>>>>> aa57431c4 (fix: Dropdown menu issues (#10364))
 };
 </script>
 
@@ -150,16 +136,6 @@ const handleClick = id => {
             class="text-xs bg-slate-50 !font-normal group-hover:bg-slate-100/50 dark:group-hover:bg-slate-700/50 !h-6 dark:bg-slate-800 rounded-md border-0 !px-2 !py-0.5"
             :label="statusText"
             :class="statusTextColor"
-<<<<<<< HEAD
-            @click="isOpen = !isOpen"
-          />
-          <OnClickOutside @trigger="isOpen = false">
-            <DropdownMenu
-              v-if="isOpen"
-              :menu-items="menuItems"
-              class="right-0 mt-2 xl:left-0 top-full"
-              @action="handleAction"
-=======
           >
             {{ statusText }}
           </span>
@@ -179,7 +155,6 @@ const handleClick = id => {
               :menu-items="articleMenuItems"
               class="mt-1 ltr:right-0 rtl:left-0 xl:ltr:left-0 xl:rtl:right-0 top-full"
               @action="handleArticleAction($event)"
->>>>>>> aa57431c4 (fix: Dropdown menu issues (#10364))
             />
           </OnClickOutside>
         </div>
