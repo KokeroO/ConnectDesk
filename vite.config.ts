@@ -86,20 +86,6 @@ export default defineConfig({
     },
   },
   server: {
-    https: {
-      key: fs.readFileSync(
-        path.resolve(
-          __dirname,
-          '/home/user/chatwoot/config/ssl/connectdesk.key'
-        )
-      ),
-      cert: fs.readFileSync(
-        path.resolve(
-          __dirname,
-          '/home/user/chatwoot/config/ssl/connectdesk.pem'
-        )
-      ),
-    },
     watch: {
       ignored: ['**/node_modules/**', '**/dist/**'], // Ignora node_modules e dist
       interval: 2000, // Define o intervalo de observação para economizar recursos

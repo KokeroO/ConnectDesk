@@ -1,5 +1,5 @@
 # Variables
-APP_NAME := chatwoot
+APP_NAME := connectdesk
 RAILS_ENV ?= development
 
 # Targets
