@@ -29,12 +29,9 @@ export default {
     return {
       lastActivityAtTimeAgo: dynamicTime(
         this.lastActivityTimestamp,
-        this.$root.$i18n.locale
+        this.$i18n.locale
       ),
-      createdAtTimeAgo: dynamicTime(
-        this.createdAtTimestamp,
-        this.$root.$i18n.locale
-      ),
+      createdAtTimeAgo: dynamicTime(this.createdAtTimestamp, this.$i18n.locale),
       timer: null,
     };
   },
@@ -43,15 +40,11 @@ export default {
       return shortTimestamp(
         this.lastActivityTimestamp,
         false,
-        this.$root.$i18n.locale
+        this.$i18n.locale
       );
     },
     createdAtTime() {
-      return shortTimestamp(
-        this.createdAtTimestamp,
-        false,
-        this.$root.$i18n.locale
-      );
+      return shortTimestamp(this.createdAtTimestamp, false, this.$i18n.locale);
     },
     createdAt() {
       const createdTimeDiff = Date.now() - this.createdAtTimestamp * 1000;
@@ -85,13 +78,13 @@ export default {
     lastActivityTimestamp() {
       this.lastActivityAtTimeAgo = dynamicTime(
         this.lastActivityTimestamp,
-        this.$root.$i18n.locale
+        this.$i18n.locale
       );
     },
     createdAtTimestamp() {
       this.createdAtTimeAgo = dynamicTime(
         this.createdAtTimestamp,
-        this.$root.$i18n.locale
+        this.$i18n.locale
       );
     },
   },
@@ -108,11 +101,11 @@ export default {
       this.timer = setTimeout(() => {
         this.lastActivityAtTimeAgo = dynamicTime(
           this.lastActivityTimestamp,
-          this.$root.$i18n.locale
+          this.$i18n.locale
         );
         this.createdAtTimeAgo = dynamicTime(
           this.createdAtTimestamp,
-          this.$root.$i18n.locale
+          this.$i18n.locale
         );
         this.createTimer();
       }, this.refreshTime());

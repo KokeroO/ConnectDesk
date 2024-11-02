@@ -45,7 +45,7 @@ const tableData = computed(() => {
     feedbackText: response.feedback_message || '---',
     conversationId: response.conversation_id,
     createdAgo: dynamicTime(response.created_at, locale),
-    createdAt: messageStamp(response.created_at, 'fullDateTime', locale),
+    createdAt: messageStamp(response.created_at, true, locale),
   }));
 });
 

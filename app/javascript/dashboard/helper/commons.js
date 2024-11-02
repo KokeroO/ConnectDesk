@@ -25,7 +25,7 @@ export const isJSONValid = value => {
   return true;
 };
 
-export const getTypingUsersText = (users = []) => {
+/* export const getTypingUsersText = (users = []) => {
   const count = users.length;
   if (count === 1) {
     const [user] = users;
@@ -49,6 +49,22 @@ export const getTypingUsersText = (users = []) => {
     typingUsers: [user.name],
     additionalUsers: rest,
   };
+}; */
+
+export const getTypingUsersText = (users = []) => {
+  const count = users.length;
+  if (count === 1) {
+    const [user] = users;
+    return ['TYPING.SINGLE', { user: user.name }];
+  }
+
+  if (count === 2) {
+    const [first, second] = users;
+    return ['TYPING.DOUBLE', { user: first.name, secondUser: second.name }];
+  }
+
+  const [user] = users;
+  return ['TYPING.MULTIPLE', { user: user.name, rest: users.length - 1 }];
 };
 
 export const createPendingMessage = data => {

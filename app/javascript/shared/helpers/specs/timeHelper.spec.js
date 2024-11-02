@@ -19,37 +19,31 @@ afterEach(() => {
 
 describe('#messageStamp', () => {
   it('returns correct value', () => {
-    expect(messageStamp(1612971343, false, this.$root.$i18n.locale)).toEqual(
-      '3:35 PM'
-    );
-    expect(
-      messageStamp(1612971343, 'fullDateTime', this.$root.$i18n.locale)
-    ).toEqual('Feb 10, 3:35 PM');
+    expect(messageStamp(1612971343, 'en')).toEqual('3:35 PM');
+    expect(messageStamp(1612971343, 'en')).toEqual('Feb 10, 3:35 PM');
   });
 });
 
 describe('#messageTimestamp', () => {
   it('should return the message date in the specified format if the message was sent in the current year', () => {
-    expect(messageTimestamp(1680777464)).toEqual('Apr 6, 2023');
+    expect(messageTimestamp(1680777464, 'en')).toEqual('Apr 6, 2023');
   });
   it('should return the message date and time in a different format if the message was sent in a different year', () => {
-    expect(messageTimestamp(1612971343)).toEqual('Feb 10 2021, 3:35 PM');
+    expect(messageTimestamp(1612971343, 'en')).toEqual('Feb 10 2021, 3:35 PM');
   });
 });
 
 describe('#dynamicTime', () => {
   it('returns correct value', () => {
     Date.now = vi.fn(() => new Date(Date.UTC(2023, 1, 14)).valueOf());
-    expect(dynamicTime(1612971343, this.$root.$i18n.locale)).toEqual(
-      'about 2 years ago'
-    );
+    expect(dynamicTime(1612971343, 'en')).toEqual('about 2 years ago');
   });
 });
 
 describe('#dateFormat', () => {
   it('returns correct value', () => {
-    expect(dateFormat(1612971343, 'standard')).toEqual('Feb 10, 2021');
-    expect(dateFormat(1612971343, 'standard')).toEqual('Feb 10, 2021');
+    expect(dateFormat(1612971343, 'en')).toEqual('Feb 10, 2021');
+    expect(dateFormat(1612971343, 'en')).toEqual('Feb 10, 2021');
   });
 });
 

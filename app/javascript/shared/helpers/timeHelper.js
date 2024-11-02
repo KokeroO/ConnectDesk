@@ -1,21 +1,13 @@
 import {
-  format,
   isSameYear,
   fromUnixTime,
   formatDistanceToNow,
+  isSameDay,
 } from 'date-fns';
 import * as locales from 'date-fns/locale';
-import dateFormatsByLocale from '../../dashboard/i18n/dateFormat';
 
 const selectedLocale = (locale = 'en') => {
-  return locales[locale.replace('-', '')]; // Fallback para enUS se o localeKey não existir
-};
-
-const formatPattern = (locale = 'en', formatType = 'standard') => {
-  return (
-    dateFormatsByLocale[locale.replace('-', '')]?.[formatType] ||
-    dateFormatsByLocale.en[formatType]
-  );
+  return locales[locale.replace('_', '')]; // Fallback para enUS se o localeKey não existir
 };
 
 /**
@@ -24,11 +16,19 @@ const formatPattern = (locale = 'en', formatType = 'standard') => {
  * @param {string} [dateFormat='h:mm a'] - Desired format of the time.
  * @returns {string} Formatted time string.
  */
-export const messageStamp = (time, formatType = 'timeOnly', locale = 'en') => {
+export const messageStamp = (time, fullDateTime = false, locale = 'en') => {
   const unixTime = fromUnixTime(time);
-  return format(unixTime, formatPattern(locale, formatType), {
-    locale: selectedLocale(locale),
-  });
+  let options;
+  options = {
+    timeStyle: 'medium',
+  };
+  if (fullDateTime) {
+    options = {
+      dateStyle: 'medium',
+      timeStyle: 'medium',
+    };
+  }
+  return new Intl.DateTimeFormat(locale, options).format(unixTime);
 };
 
 /**
@@ -37,22 +37,30 @@ export const messageStamp = (time, formatType = 'timeOnly', locale = 'en') => {
  * @param {string} [dateFormat='MMM d, yyyy'] - Desired date format.
  * @returns {string} Formatted date string.
  */
-export const messageTimestamp = (
-  time,
-  formatType = 'standard',
-  locale = 'en'
-) => {
+export const messageTimestamp = (time, locale = 'en') => {
   const messageTime = fromUnixTime(time);
   const now = new Date();
-  const messageDate = format(messageTime, formatPattern(locale, formatType), {
-    locale: selectedLocale(locale),
-  });
-  if (!isSameYear(messageTime, now)) {
-    return format(messageTime, formatPattern(locale, formatType), {
-      locale: selectedLocale(locale),
-    });
+
+  let options;
+  if (isSameYear(messageTime, now)) {
+    options = {
+      dateStyle: 'medium',
+      timeStyle: 'medium',
+    };
+    if (isSameDay) {
+      options = {
+        timeStyle: 'medium',
+      };
+    }
+  } else {
+    options = {
+      dateStyle: 'medium',
+    };
   }
-  return messageDate;
+
+  return new Intl.DateTimeFormat(locale.replace('_', '-'), options).format(
+    messageTime
+  );
 };
 
 /**
@@ -74,11 +82,11 @@ export const dynamicTime = (time, locale) => {
  * @param {string} [dateFormat='MMM d, yyyy'] - Desired date format.
  * @returns {string} Formatted date string.
  */
-export const dateFormat = (time, formatType = 'standard', locale = 'en') => {
+export const dateFormat = (time, locale = 'en') => {
   const unixTime = fromUnixTime(time);
-  return format(unixTime, formatPattern(locale, formatType), {
-    locale: selectedLocale(locale),
-  });
+  return new Intl.DateTimeFormat(locale.replace('_', '-'), {
+    dateStyle: 'medium',
+  }).format(unixTime);
 };
 
 /**

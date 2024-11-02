@@ -4,7 +4,7 @@
 #
 #  id            :bigint           not null, primary key
 #  body          :text             not null
-#  locale        :integer          default("pt_BR"), not null
+#  locale        :integer          default("pt-BR"), not null
 #  name          :string           not null
 #  template_type :integer          default("content")
 #  created_at    :datetime         not null

@@ -136,7 +136,7 @@ export default {
       const userList = this.typingUsersList;
       return userList.length !== 0;
     },
-    typingUserNames() {
+    /* typingUserNames() {
       const userList = this.typingUsersList;
       if (this.isAnyoneTyping) {
         const { typingUsers, additionalUsers } = getTypingUsersText(userList);
@@ -155,6 +155,15 @@ export default {
           user: typingUsers[0],
           rest: additionalUsers,
         });
+      }
+
+      return ''; */
+
+    typingUserNames() {
+      const userList = this.typingUsersList;
+      if (this.isAnyoneTyping) {
+        const [i18nKey, params] = getTypingUsersText(userList);
+        return this.$t(i18nKey, params);
       }
 
       return '';

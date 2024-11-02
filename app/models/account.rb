@@ -8,7 +8,7 @@
 #  domain                :string(100)
 #  feature_flags         :bigint           default(0), not null
 #  limits                :jsonb
-#  locale                :integer          default("pt_BR")
+#  locale                :integer          default("pt-BR")
 #  name                  :string           not null
 #  status                :integer          default("active")
 #  support_email         :string(100)
