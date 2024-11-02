@@ -136,29 +136,6 @@ export default {
       const userList = this.typingUsersList;
       return userList.length !== 0;
     },
-    /* typingUserNames() {
-      const userList = this.typingUsersList;
-      if (this.isAnyoneTyping) {
-        const { typingUsers, additionalUsers } = getTypingUsersText(userList);
-        if (additionalUsers === 0) {
-          if (typingUsers.length === 1) {
-            return this.$t('TYPING.SINGLE', { user: typingUsers[0] });
-          }
-          if (typingUsers.length === 2) {
-            return this.$t('TYPING.DOUBLE', {
-              user: typingUsers[0],
-              secondUser: typingUsers[1],
-            });
-          }
-        }
-        return this.$t('TYPING.MULTIPLE', {
-          user: typingUsers[0],
-          rest: additionalUsers,
-        });
-      }
-
-      return ''; */
-
     typingUserNames() {
       const userList = this.typingUsersList;
       if (this.isAnyoneTyping) {

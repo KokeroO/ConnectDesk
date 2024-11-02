@@ -20,7 +20,7 @@ We need to edit the `asset:precompile` rake task to include the SDK in the preco
 */
 import { defineConfig } from 'vite';
 import ruby from 'vite-plugin-ruby';
-import fs from 'fs';
+
 import path from 'path';
 import vue from '@vitejs/plugin-vue';
 

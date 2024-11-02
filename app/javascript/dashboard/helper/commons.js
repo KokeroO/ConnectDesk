@@ -25,32 +25,6 @@ export const isJSONValid = value => {
   return true;
 };
 
-/* export const getTypingUsersText = (users = []) => {
-  const count = users.length;
-  if (count === 1) {
-    const [user] = users;
-    return {
-      typingUsers: [user.name],
-      additionalUsers: 0,
-    };
-  }
-
-  if (count === 2) {
-    const [first, second] = users;
-    return {
-      typingUsers: [first.name, second.name],
-      additionalUsers: 0,
-    };
-  }
-
-  const [user] = users;
-  const rest = users.length - 1;
-  return {
-    typingUsers: [user.name],
-    additionalUsers: rest,
-  };
-}; */
-
 export const getTypingUsersText = (users = []) => {
   const count = users.length;
   if (count === 1) {
