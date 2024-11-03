@@ -12,9 +12,7 @@ import DragWrapper from 'widget/components/DragWrapper.vue';
 import { BUS_EVENTS } from 'shared/constants/busEvents';
 import { emitter } from 'shared/helpers/mitt';
 import { mapGetters } from 'vuex';
-import { useI18n } from 'vue-i18n';
 
-const { locale } = useI18n();
 export default {
   name: 'UserMessage',
   components: {
@@ -59,7 +57,7 @@ export default {
     },
     readableTime() {
       const { created_at: createdAt = '' } = this.message;
-      return messageStamp(createdAt, true, locale.value);
+      return messageStamp(createdAt, true, this.$i18n.locale);
     },
     isFailed() {
       const { status = '' } = this.message;
