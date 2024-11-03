@@ -25,7 +25,7 @@ unless Rails.env.production?
     name: 'Empresa Teste'
   )
 
-  user = User.new(name: 'John', email: 'wil_kokero@hotmail.com', password: 'Password1!', type: 'SuperAdmin')
+  user = User.new(name: 'Willian', email: 'wil_kokero@hotmail.com', password: 'Password1!', type: 'SuperAdmin')
   user.skip_confirmation!
   user.save!
 
@@ -43,7 +43,7 @@ unless Rails.env.production?
 
   web_widget = Channel::WebWidget.create!(account: account, website_url: 'https://www.juranda.pr.gov.br')
 
-  inbox = Inbox.create!(channel: web_widget, account: account, name: 'Acme Support')
+  inbox = Inbox.create!(channel: web_widget, account: account, name: 'Município de Juranda')
   InboxMember.create!(user: user, inbox: inbox)
 
   contact_inbox = ContactInboxWithContactBuilder.new(

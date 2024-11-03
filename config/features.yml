@@ -93,4 +93,4 @@
   enabled: true
   premium: true
 - name: chatwoot_v4
-  enabled: true
+  enabled: false

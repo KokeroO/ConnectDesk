@@ -11,6 +11,7 @@ import AutomationRuleRow from './AutomationRuleRow.vue';
 const getters = useStoreGetters();
 const store = useStore();
 const { t } = useI18n();
+
 const confirmDialog = ref(null);
 
 const loading = ref({});
@@ -214,6 +215,7 @@ const tableHeaders = computed(() => {
             :key="automation.id"
             :automation="automation"
             :loading="loading[automation.id]"
+            :selected-locale="selectedLocale"
             @clone="cloneAutomation"
             @toggle="toggleAutomation"
             @edit="openEditPopup"
