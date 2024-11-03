@@ -110,10 +110,7 @@ export default {
             <div class="text-right timestamp--column">
               <span class="notification--created-at">
                 {{
-                  dynamicTime(
-                    notificationItem.last_activity_at,
-                    $root.$i18n.locale
-                  )
+                  dynamicTime(notificationItem.last_activity_at, $i18n.locale)
                 }}
               </span>
             </div>

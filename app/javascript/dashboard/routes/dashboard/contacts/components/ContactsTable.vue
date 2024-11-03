@@ -1,5 +1,4 @@
 <script setup>
-import { getCurrentInstance } from 'vue';
 import { h, ref, computed, defineEmits } from 'vue';
 import {
   useVueTable,
@@ -35,8 +34,7 @@ const props = defineProps({
 });
 
 const emit = defineEmits(['onSortChange']);
-const { t } = useI18n();
-const locale = getCurrentInstance()?.proxy.$i18n.locale;
+const { t, locale } = useI18n();
 
 const tableData = computed(() => {
   if (props.isLoading) {
@@ -54,9 +52,9 @@ const tableData = computed(() => {
       ...item,
       profiles: additional.social_profiles || {},
       last_activity_at: lastActivityAt
-        ? dynamicTime(lastActivityAt, locale)
+        ? dynamicTime(lastActivityAt, locale.value)
         : null,
-      created_at: createdAt ? dynamicTime(createdAt, locale) : null,
+      created_at: createdAt ? dynamicTime(createdAt, locale.value) : null,
     };
   });
 });

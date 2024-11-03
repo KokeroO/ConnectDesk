@@ -54,7 +54,8 @@ export default {
             this.createdAtTimeAgo
           }`
         : `${this.$t('CHAT_LIST.CHAT_TIME_STAMP.CREATED.OLDEST')} ${dateFormat(
-            this.createdAtTimestamp
+            this.createdAtTimestamp,
+            this.$i18n.locale
           )}`;
     },
     lastActivity() {
@@ -67,7 +68,7 @@ export default {
           }`
         : `${this.$t(
             'CHAT_LIST.CHAT_TIME_STAMP.LAST_ACTIVITY.NOT_ACTIVE'
-          )} ${dateFormat(this.lastActivityTimestamp)}`;
+          )} ${dateFormat(this.lastActivityTimestamp, this.$i18n.locale)}`;
     },
     tooltipText() {
       return `${this.createdAt}

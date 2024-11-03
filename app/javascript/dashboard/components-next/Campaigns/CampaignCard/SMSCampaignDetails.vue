@@ -18,7 +18,7 @@ defineProps({
   },
 });
 
-const { t, locale } = useI18n();
+const { t } = useI18n();
 </script>
 
 <template>
@@ -36,6 +36,6 @@ const { t, locale } = useI18n();
     {{ t('CAMPAIGN.SMS.CARD.CAMPAIGN_DETAILS.ON') }}
   </span>
   <span class="flex-1 text-sm font-medium truncate text-n-slate-12">
-    {{ messageStamp(new Date(scheduledAt), true, locale) }}
+    {{ messageStamp(new Date(scheduledAt), true, $i18n.locale) }}
   </span>
 </template>
