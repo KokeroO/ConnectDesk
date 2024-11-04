@@ -215,7 +215,6 @@ const tableHeaders = computed(() => {
             :key="automation.id"
             :automation="automation"
             :loading="loading[automation.id]"
-            :selected-locale="selectedLocale"
             @clone="cloneAutomation"
             @toggle="toggleAutomation"
             @edit="openEditPopup"
