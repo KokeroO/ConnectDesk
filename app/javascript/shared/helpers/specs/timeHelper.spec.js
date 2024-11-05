@@ -35,8 +35,11 @@ describe('#dynamicTime', () => {
 
 describe('#dateFormat', () => {
   it('returns correct value', () => {
-    expect(dateFormat(1612971343, 'en')).toEqual('Feb 10, 2021');
-    expect(dateFormat(1612971343, 'en')).toEqual('Feb 10, 2021');
+    expect(dateFormat(1612971343, 'dateS')).toEqual('Feb 10, 2021');
+    expect(dateFormat(1612971343, 'dateM')).toEqual('Feb 10, 2021');
+    expect(dateFormat(1612971343, 'dateM_timeS')).toEqual('Feb 10, 2021');
+    expect(dateFormat(1612971343, 'dateM_timeM')).toEqual('Feb 10, 2021');
+    expect(dateFormat(1612971343)).toEqual('Feb 10, 2021');
   });
 });
 
