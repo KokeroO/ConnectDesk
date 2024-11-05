@@ -2,6 +2,7 @@ import {
   isSameYear,
   fromUnixTime,
   formatDistanceToNow,
+  formatDistanceToNowStrict,
   isSameDay,
 } from 'date-fns';
 import * as locales from 'date-fns/locale';
@@ -91,7 +92,13 @@ export const dynamicTime = (time, locale = 'en') => {
  */
 export const shortTimestamp = (time, withAgo = false, locale = 'en') => {
   const unixTime = fromUnixTime(time);
-  return formatDistanceToNow(unixTime, {
+  if (Date.now() / 1000 - time < 60) {
+    return formatDistanceToNow(unixTime, {
+      addSuffix: withAgo,
+      locale: locales[locale.replace('_', '')],
+    });
+  }
+  return formatDistanceToNowStrict(unixTime, {
     addSuffix: withAgo,
     locale: locales[locale.replace('_', '')],
   });
