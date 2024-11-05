@@ -16,7 +16,7 @@ import ReplyToChip from 'widget/components/ReplyToChip.vue';
 import { BUS_EVENTS } from 'shared/constants/busEvents';
 import { emitter } from 'shared/helpers/mitt';
 
-const { localeMessageStamp } = useLocaleDateFormatter();
+const { localeDateFormat } = useLocaleDateFormatter();
 
 export default {
   name: 'AgentMessage',
@@ -66,7 +66,7 @@ export default {
     },
     readableTime() {
       const { created_at: createdAt = '' } = this.message;
-      return localeMessageStamp(createdAt, true);
+      return localeDateFormat(createdAt, 'full');
     },
     messageType() {
       const { message_type: type = 1 } = this.message;

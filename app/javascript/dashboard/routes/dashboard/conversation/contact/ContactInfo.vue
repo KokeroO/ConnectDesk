@@ -18,8 +18,6 @@ import {
 } from '../../../../helper/routeHelpers';
 import { emitter } from 'shared/helpers/mitt';
 
-const { localeDynamicTime } = useLocaleDateFormatter();
-
 export default {
   components: {
     ContactInfoRow,
@@ -50,8 +48,10 @@ export default {
   emits: ['togglePanel', 'panelClose'],
   setup() {
     const { isAdmin } = useAdmin();
+    const { localeDynamicTime } = useLocaleDateFormatter();
     return {
       isAdmin,
+      localeDynamicTime,
     };
   },
   data() {
@@ -101,7 +101,6 @@ export default {
     },
   },
   methods: {
-    localeDynamicTime,
     toggleEditModal() {
       this.showEditModal = !this.showEditModal;
     },

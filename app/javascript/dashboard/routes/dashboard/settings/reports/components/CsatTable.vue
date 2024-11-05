@@ -31,7 +31,7 @@ const { pageIndex } = defineProps({
 
 const emit = defineEmits(['pageChange']);
 const { t } = useI18n();
-const { localeMessageStamp, localeDynamicTime } = useLocaleDateFormatter();
+const { localeDateFormat, localeDynamicTime } = useLocaleDateFormatter();
 // const isRTL = useMapGetter('accounts/isRTL');
 const csatResponses = useMapGetter('csat/getCSATResponses');
 const metrics = useMapGetter('csat/getMetrics');
@@ -44,7 +44,7 @@ const tableData = computed(() => {
     feedbackText: response.feedback_message || '---',
     conversationId: response.conversation_id,
     createdAgo: localeDynamicTime(response.created_at),
-    createdAt: localeMessageStamp(response.created_at, true),
+    createdAt: localeDateFormat(response.created_at, 'full'),
   }));
 });
 

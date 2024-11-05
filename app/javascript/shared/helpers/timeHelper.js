@@ -11,31 +11,6 @@ const selectedLocaleToDateFns = (locale = 'en') => {
 };
 
 /**
- * Formats a Unix timestamp into a human-readable time format.
- * @param {number} time - Unix timestamp.
- * @param {boolean} [fullDateTime=true] - Desired format of the time.
- * @param {string} [locale='en'] - Desired locale and region.
- * @returns {string} Formatted time string.
- */
-export const messageStamp = (time, fullDateTime = false, locale = 'en') => {
-  const unixTime = fromUnixTime(time);
-  let options;
-  options = {
-    dateStyle: 'short',
-    timeStyle: 'short',
-  };
-  if (fullDateTime) {
-    options = {
-      dateStyle: 'medium',
-      timeStyle: 'medium',
-    };
-  }
-  return new Intl.DateTimeFormat(locale.replace('_', '-'), options).format(
-    unixTime
-  );
-};
-
-/**
  * Provides a formatted timestamp, adjusting the format based on the current year.
  * @param {number} time - Unix timestamp.
  * @param {string} [locale='en'] - Desired locale and region.
@@ -48,11 +23,11 @@ export const messageTimestamp = (time, locale = 'en') => {
   if (isSameYear(messageTime, now)) {
     options = {
       dateStyle: 'medium',
-      timeStyle: 'medium',
+      timeStyle: 'short',
     };
     if (isSameDay(messageTime, now)) {
       options = {
-        timeStyle: 'medium',
+        timeStyle: 'short',
       };
     }
   } else {
@@ -86,11 +61,30 @@ export const dynamicTime = (time, locale) => {
  * @param {string} [locale='en'] - Desired locale and region.
  * @returns {string} Formatted date string.
  */
-export const dateFormat = (time, locale = 'en') => {
+export const dateFormat = (time, formatStyle = 'medium', locale = 'en') => {
   const unixTime = fromUnixTime(time);
-  return new Intl.DateTimeFormat(locale.replace('_', '-'), {
-    dateStyle: 'medium',
-  }).format(unixTime);
+  const options = {};
+  switch (formatStyle) {
+    case 'short':
+      options.dateStyle = 'short';
+      break;
+    case 'medium':
+      options.dateStyle = 'medium';
+      break;
+    case 'long':
+      options.dateStyle = 'long';
+      break;
+    case 'full':
+      options.dateStyle = 'medium';
+      options.timeStyle = 'medium';
+      break;
+    default:
+      options.dateStyle = 'medium';
+  }
+
+  return new Intl.DateTimeFormat(locale.replace('_', '-'), options).format(
+    unixTime
+  );
 };
 
 /**

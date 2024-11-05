@@ -9,8 +9,6 @@ import { snoozedReopenTime } from 'dashboard/helper/snoozeHelpers';
 import { INBOX_EVENTS } from 'dashboard/helper/AnalyticsHelper/events';
 import { useTrack } from 'dashboard/composables';
 
-const { localeShortTimestamp } = useLocaleDateFormatter();
-
 export default {
   components: {
     PriorityIcon,
@@ -36,6 +34,10 @@ export default {
     'markNotificationAsUnRead',
     'deleteNotification',
   ],
+  setup() {
+    const { localeShortTimestamp } = useLocaleDateFormatter();
+    return { localeShortTimestamp };
+  },
   data() {
     return {
       isContextMenuOpen: false,
@@ -66,7 +68,7 @@ export default {
       );
     },
     lastActivityAt() {
-      return localeShortTimestamp(
+      return this.localeShortTimestamp(
         this.notificationItem?.last_activity_at,
         true
       );

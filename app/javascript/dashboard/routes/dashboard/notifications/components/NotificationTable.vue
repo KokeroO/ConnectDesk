@@ -5,8 +5,6 @@ import EmptyState from 'dashboard/components/widgets/EmptyState.vue';
 import useLocaleDateFormatter from 'dashboard/composables/useLocaleDateFormatter';
 import { mapGetters } from 'vuex';
 
-const { localeDynamicTime } = useLocaleDateFormatter();
-
 export default {
   components: {
     Thumbnail,
@@ -35,6 +33,10 @@ export default {
       default: () => {},
     },
   },
+  setup() {
+    const { localeDynamicTime } = useLocaleDateFormatter();
+    return { localeDynamicTime };
+  },
   computed: {
     ...mapGetters({
       notificationMetadata: 'notifications/getMeta',
@@ -42,9 +44,6 @@ export default {
     showEmptyResult() {
       return !this.isLoading && this.notifications.length === 0;
     },
-  },
-  methods: {
-    localeDynamicTime,
   },
 };
 </script>

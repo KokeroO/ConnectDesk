@@ -13,7 +13,7 @@ import { BUS_EVENTS } from 'shared/constants/busEvents';
 import { emitter } from 'shared/helpers/mitt';
 import { mapGetters } from 'vuex';
 
-const { localeMessageStamp } = useLocaleDateFormatter();
+const { localeDateFormat } = useLocaleDateFormatter();
 
 export default {
   name: 'UserMessage',
@@ -59,7 +59,7 @@ export default {
     },
     readableTime() {
       const { created_at: createdAt = '' } = this.message;
-      return localeMessageStamp(createdAt, false);
+      return localeDateFormat(createdAt, 'medium');
     },
     isFailed() {
       const { status = '' } = this.message;
