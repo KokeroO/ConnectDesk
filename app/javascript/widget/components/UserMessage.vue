@@ -59,7 +59,7 @@ export default {
     },
     readableTime() {
       const { created_at: createdAt = '' } = this.message;
-      return localeDateFormat(createdAt, 'medium');
+      return localeDateFormat(createdAt, 'dateM_timeM');
     },
     isFailed() {
       const { status = '' } = this.message;

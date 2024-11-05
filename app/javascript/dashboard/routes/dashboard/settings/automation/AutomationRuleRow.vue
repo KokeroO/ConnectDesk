@@ -16,8 +16,9 @@ const emit = defineEmits(['toggle', 'edit', 'delete', 'clone']);
 
 const { localeDateFormat } = useLocaleDateFormatter();
 
-const readableDate = date => localeDateFormat(new Date(date), 'medium');
-const readableDateWithTime = date => localeDateFormat(new Date(date), 'full');
+const readableDate = date => localeDateFormat(new Date(date), 'dateM');
+const readableDateWithTime = date =>
+  localeDateFormat(new Date(date), 'dateM_timeM');
 
 const toggle = () => {
   const { id, name, active } = props.automation;

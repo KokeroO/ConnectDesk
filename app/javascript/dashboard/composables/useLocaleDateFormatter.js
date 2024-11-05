@@ -1,6 +1,6 @@
 import { useI18n } from 'vue-i18n';
 import {
-  messageTimestamp,
+  messageDateFormat,
   dynamicTime,
   dateFormat,
   shortTimestamp,
@@ -13,13 +13,13 @@ export default function useLocaleDateFormatter() {
   const localeDateFormat = (...args) => dateFormat(...args, locale.value);
   const localeShortTimestamp = (...args) =>
     shortTimestamp(...args, locale.value);
-  const localeMessageTimestamp = (...args) =>
-    messageTimestamp(...args, locale.value);
+  const localeMessageDateFormat = (...args) =>
+    messageDateFormat(...args, locale.value);
 
   return {
     localeDynamicTime,
     localeDateFormat,
     localeShortTimestamp,
-    localeMessageTimestamp,
+    localeMessageDateFormat,
   };
 }

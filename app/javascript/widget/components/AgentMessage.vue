@@ -66,7 +66,7 @@ export default {
     },
     readableTime() {
       const { created_at: createdAt = '' } = this.message;
-      return localeDateFormat(createdAt, 'full');
+      return localeDateFormat(createdAt, 'dateM_timeM');
     },
     messageType() {
       const { message_type: type = 1 } = this.message;

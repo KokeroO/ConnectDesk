@@ -17,13 +17,6 @@ afterEach(() => {
   vi.useRealTimers();
 });
 
-describe('#messageStamp', () => {
-  it('returns correct value', () => {
-    expect(messageStamp(1612971343, 'en')).toEqual('3:35 PM');
-    expect(messageStamp(1612971343, 'en')).toEqual('Feb 10, 3:35 PM');
-  });
-});
-
 describe('#messageTimestamp', () => {
   it('should return the message date in the specified format if the message was sent in the current year', () => {
     expect(messageTimestamp(1680777464, 'en')).toEqual('Apr 6, 2023');

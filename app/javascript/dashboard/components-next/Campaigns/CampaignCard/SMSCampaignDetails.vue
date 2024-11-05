@@ -37,6 +37,6 @@ const { localeDateFormat } = useLocaleDateFormatter();
     {{ t('CAMPAIGN.SMS.CARD.CAMPAIGN_DETAILS.ON') }}
   </span>
   <span class="flex-1 text-sm font-medium truncate text-n-slate-12">
-    {{ localeDateFormat(new Date(scheduledAt), 'full') }}
+    {{ localeDateFormat(new Date(scheduledAt), 'dateM_timeM') }}
   </span>
 </template>
