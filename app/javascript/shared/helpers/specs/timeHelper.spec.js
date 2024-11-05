@@ -1,6 +1,5 @@
 import {
-  messageStamp,
-  messageTimestamp,
+  messageDateFormat,
   dynamicTime,
   dateFormat,
   shortTimestamp,
@@ -9,7 +8,8 @@ import {
 beforeEach(() => {
   process.env.TZ = 'UTC';
   vi.useFakeTimers('modern');
-  const mockDate = new Date(Date.UTC(2023, 4, 5));
+  const mockDate = new Date(Date.UTC(2024, 10, 5, 11, 30));
+  console.log(mockDate);
   vi.setSystemTime(mockDate);
 });
 
@@ -17,28 +17,36 @@ afterEach(() => {
   vi.useRealTimers();
 });
 
-describe('#messageTimestamp', () => {
-  it('should return the message date in the specified format if the message was sent in the current year', () => {
-    expect(messageTimestamp(1680777464, 'en')).toEqual('Apr 6, 2023');
-  });
-  it('should return the message date and time in a different format if the message was sent in a different year', () => {
-    expect(messageTimestamp(1612971343, 'en')).toEqual('Feb 10 2021, 3:35 PM');
+describe('#dynamicTime', () => {
+  it('returns correct value', () => {
+    expect(dynamicTime(1667646000, 'en')).toEqual('about 2 years ago');
   });
 });
 
-describe('#dynamicTime', () => {
-  it('returns correct value', () => {
-    Date.now = vi.fn(() => new Date(Date.UTC(2023, 1, 14)).valueOf());
-    expect(dynamicTime(1612971343, 'en')).toEqual('about 2 years ago');
+describe('#messageDateFormat', () => {
+  it('should return the message date in the specified format if the message was sent in the current year', () => {
+    expect(messageDateFormat(1730806200, 'en')).toEqual('11:30 AM');
+  });
+  it('should return the message date and time in a different format if the message was sent in a different year', () => {
+    expect(messageDateFormat(1730633400, 'en')).toEqual(
+      'Nov 3, 2024, 11:30 AM'
+    );
+  });
+  it('should return the message date and time in a different format if the message was sent in a different year', () => {
+    expect(messageDateFormat(1612971343, 'en')).toEqual('Feb 10, 2021');
   });
 });
 
 describe('#dateFormat', () => {
   it('returns correct value', () => {
-    expect(dateFormat(1612971343, 'dateS')).toEqual('Feb 10, 2021');
+    expect(dateFormat(1612971343, 'dateS')).toEqual('2/10/21');
     expect(dateFormat(1612971343, 'dateM')).toEqual('Feb 10, 2021');
-    expect(dateFormat(1612971343, 'dateM_timeS')).toEqual('Feb 10, 2021');
-    expect(dateFormat(1612971343, 'dateM_timeM')).toEqual('Feb 10, 2021');
+    expect(dateFormat(1612971343, 'dateM_timeS')).toEqual(
+      'Feb 10, 2021, 3:35 PM'
+    );
+    expect(dateFormat(1612971343, 'dateM_timeM')).toEqual(
+      'Feb 10, 2021, 3:35:43 PM'
+    );
     expect(dateFormat(1612971343)).toEqual('Feb 10, 2021');
   });
 });

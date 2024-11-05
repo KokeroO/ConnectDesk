@@ -74,7 +74,7 @@ export const dateFormat = (time, formatStyle = 'dateM', locale = 'en') => {
  * @param {string} [locale='en'] - Desired locale and region.
  * @returns {string} Relative time string.
  */
-export const dynamicTime = (time, locale) => {
+export const dynamicTime = (time, locale = 'en') => {
   const unixTime = fromUnixTime(time);
   return formatDistanceToNow(unixTime, {
     addSuffix: true,
