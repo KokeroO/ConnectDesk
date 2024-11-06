@@ -29,7 +29,7 @@ export default {
       articleUiFlags: 'article/uiFlags',
     }),
     widgetLocale() {
-      return this.$i18n.locale.replace('-', '_') || 'en';
+      return this.$i18n.locale || 'en';
     },
     portal() {
       return window.chatwootWebChannel.portal;

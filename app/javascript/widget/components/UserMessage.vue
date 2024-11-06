@@ -13,8 +13,6 @@ import { BUS_EVENTS } from 'shared/constants/busEvents';
 import { emitter } from 'shared/helpers/mitt';
 import { mapGetters } from 'vuex';
 
-const { localeDateFormat } = useLocaleDateFormatter();
-
 export default {
   name: 'UserMessage',
   components: {
@@ -38,6 +36,10 @@ export default {
       default: () => {},
     },
   },
+  setup() {
+    const { localeDateFormat } = useLocaleDateFormatter();
+    return { localeDateFormat };
+  },
   data() {
     return {
       hasImageError: false,
@@ -59,7 +61,7 @@ export default {
     },
     readableTime() {
       const { created_at: createdAt = '' } = this.message;
-      return localeDateFormat(createdAt, 'dateM_timeM');
+      return this.localeDateFormat(createdAt, 'dateM_timeM');
     },
     isFailed() {
       const { status = '' } = this.message;
