@@ -1,7 +1,7 @@
 export const ONGOING_CAMPAIGN_EMPTY_STATE_CONTENT = [
   {
     id: 1,
-    title: 'Chatbot Assistance',
+    title: 'Bem Vindos',
     inbox: {
       id: 2,
       name: 'PaperLayer Website',
@@ -10,9 +10,10 @@ export const ONGOING_CAMPAIGN_EMPTY_STATE_CONTENT = [
     },
     sender: {
       id: 1,
-      name: 'Alexa Rivera',
+      name: 'Brenda Melo',
     },
-    message: 'Hello! 👋 Need help with our chatbot features? Feel free to ask!',
+    message:
+      'Olá! 👋 Precisa de ajuda com nossos produtos e serviços? Estamos aqui para responder qualquer dúvida!',
     campaign_status: 'active',
     enabled: true,
     campaign_type: 'ongoing',
@@ -26,7 +27,7 @@ export const ONGOING_CAMPAIGN_EMPTY_STATE_CONTENT = [
   },
   {
     id: 2,
-    title: 'Pricing Information Support',
+    title: 'Boas Vindas',
     inbox: {
       id: 2,
       name: 'PaperLayer Website',
@@ -35,9 +36,10 @@ export const ONGOING_CAMPAIGN_EMPTY_STATE_CONTENT = [
     },
     sender: {
       id: 1,
-      name: 'Jamie Lee',
+      name: 'Victor Carvalho',
     },
-    message: 'Hello! 👋 Any questions on pricing? I’m here to help!',
+    message:
+      'Oi! 👋 Posso ajudar com algo relacionado às suas compras ou ao suporte? Sinta-se à vontade para perguntar!',
     campaign_status: 'active',
     enabled: false,
     campaign_type: 'ongoing',
@@ -51,7 +53,7 @@ export const ONGOING_CAMPAIGN_EMPTY_STATE_CONTENT = [
   },
   {
     id: 3,
-    title: 'Product Setup Assistance',
+    title: 'Boas Vindas',
     inbox: {
       id: 2,
       name: 'PaperLayer Website',
@@ -60,9 +62,10 @@ export const ONGOING_CAMPAIGN_EMPTY_STATE_CONTENT = [
     },
     sender: {
       id: 1,
-      name: 'Chatwoot',
+      name: 'Rafaela Correia',
     },
-    message: 'Hi! Chatwoot here. Need help setting up? Let me know!',
+    message:
+      'Olá! 👋 Precisa de alguma assistência com nossas soluções? Estamos prontos para ajudar, é só perguntar!',
     campaign_status: 'active',
     enabled: false,
     campaign_type: 'ongoing',
@@ -76,7 +79,7 @@ export const ONGOING_CAMPAIGN_EMPTY_STATE_CONTENT = [
   },
   {
     id: 4,
-    title: 'General Assistance Campaign',
+    title: 'Boas Vindas',
     inbox: {
       id: 2,
       name: 'PaperLayer Website',
@@ -85,10 +88,10 @@ export const ONGOING_CAMPAIGN_EMPTY_STATE_CONTENT = [
     },
     sender: {
       id: 1,
-      name: 'Chris Barlow',
+      name: 'Gustavo Rodrigues',
     },
     message:
-      'Hi there! 👋 I’m here for any questions you may have. Let’s chat!',
+      'Oi! 👋 Posso ajudar com algo relacionado às suas compras ou ao suporte? Sinta-se à vontade para perguntar!',
     campaign_status: 'active',
     enabled: true,
     campaign_type: 'ongoing',
@@ -105,7 +108,7 @@ export const ONGOING_CAMPAIGN_EMPTY_STATE_CONTENT = [
 export const ONE_OFF_CAMPAIGN_EMPTY_STATE_CONTENT = [
   {
     id: 1,
-    title: 'Customer Feedback Request',
+    title: 'Boas Vindas',
     inbox: {
       id: 6,
       name: 'PaperLayer Mobile',
@@ -114,7 +117,7 @@ export const ONE_OFF_CAMPAIGN_EMPTY_STATE_CONTENT = [
       provider: 'default',
     },
     message:
-      'Hello! Enjoying our product? Share your feedback on G2 and earn a $25 Amazon coupon: https://chwt.app/g2-review',
+      'Oi! 👋 Tem alguma dúvida ou precisa de mais informações sobre nossos serviços? Estamos à disposição para ajudar!',
     campaign_status: 'active',
     enabled: true,
     campaign_type: 'one_off',
@@ -131,7 +134,7 @@ export const ONE_OFF_CAMPAIGN_EMPTY_STATE_CONTENT = [
   },
   {
     id: 2,
-    title: 'Welcome New Customer',
+    title: 'Boas Vindas',
     inbox: {
       id: 6,
       name: 'PaperLayer Mobile',
@@ -139,7 +142,8 @@ export const ONE_OFF_CAMPAIGN_EMPTY_STATE_CONTENT = [
       phone_number: '+29818373149903',
       provider: 'default',
     },
-    message: 'Welcome aboard! 🎉 Let us know if you have any questions.',
+    message:
+      'Bem-vindo! 👋 Precisa de ajuda para planejar sua estadia ou tem perguntas sobre nossos serviços? Estamos aqui para tornar sua experiência incrível!',
     campaign_status: 'completed',
     enabled: true,
     campaign_type: 'one_off',
@@ -158,7 +162,7 @@ export const ONE_OFF_CAMPAIGN_EMPTY_STATE_CONTENT = [
   },
   {
     id: 3,
-    title: 'New Business Welcome',
+    title: 'Boas Vindas',
     inbox: {
       id: 6,
       name: 'PaperLayer Mobile',
@@ -166,35 +170,8 @@ export const ONE_OFF_CAMPAIGN_EMPTY_STATE_CONTENT = [
       phone_number: '+29818373149903',
       provider: 'default',
     },
-    message: 'Hello! We’re excited to have your business with us!',
-    campaign_status: 'active',
-    enabled: true,
-    campaign_type: 'one_off',
-    scheduled_at: 1730368440,
-    audience: [
-      { id: 1, type: 'Label' },
-      { id: 3, type: 'Label' },
-      { id: 6, type: 'Label' },
-      { id: 4, type: 'Label' },
-      { id: 2, type: 'Label' },
-      { id: 5, type: 'Label' },
-    ],
-    trigger_rules: {},
-    trigger_only_during_business_hours: false,
-    created_at: '2024-10-30T07:54:49.915Z',
-    updated_at: '2024-10-30T07:54:49.915Z',
-  },
-  {
-    id: 4,
-    title: 'New Member Onboarding',
-    inbox: {
-      id: 6,
-      name: 'PaperLayer Mobile',
-      channel_type: 'Channel::Sms',
-      phone_number: '+29818373149903',
-      provider: 'default',
-    },
-    message: 'Welcome to the team! Reach out if you have questions.',
+    message:
+      'Oi! 👋 Tem dúvidas sobre nossos cursos ou precisa de informações adicionais? Estamos aqui para esclarecer tudo o que precisar!',
     campaign_status: 'completed',
     enabled: true,
     campaign_type: 'one_off',
