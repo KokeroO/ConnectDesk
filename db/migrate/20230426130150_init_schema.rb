@@ -1,8 +1,4 @@
 class InitSchema < ActiveRecord::Migration[6.1]
-  execute "CREATE SCHEMA IF NOT EXISTS #{ENV['SCHEMA']}"
-
-  # Definir o search_path para o schema chatwoot
-  execute "SET search_path TO #{ENV['SCHEMA']}, public"
   def up
     # These are extensions that must be enabled in order to support this database
     enable_extension "pg_stat_statements"

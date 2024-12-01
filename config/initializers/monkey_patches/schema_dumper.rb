@@ -28,10 +28,10 @@ module ActiveRecord
   end
 end
 
-## Extentions / Tables to be ignored TABELAS IGNORADAS
-## ActiveRecord::ConnectionAdapters::PostgreSQL::SchemaDumper.ignore_extentions << 'vector'
-## ActiveRecord::SchemaDumper.ignore_tables << 'responses'
-## ActiveRecord::SchemaDumper.ignore_tables << 'response_sources'
-## ActiveRecord::SchemaDumper.ignore_tables << 'response_documents'
-## ActiveRecord::SchemaDumper.ignore_tables << 'inbox_response_sources'
-## ActiveRecord::SchemaDumper.ignore_tables << 'article_embeddings'
+## Extentions / Tables to be ignored
+ActiveRecord::ConnectionAdapters::PostgreSQL::SchemaDumper.ignore_extentions << 'vector'
+ActiveRecord::SchemaDumper.ignore_tables << 'responses'
+ActiveRecord::SchemaDumper.ignore_tables << 'response_sources'
+ActiveRecord::SchemaDumper.ignore_tables << 'response_documents'
+ActiveRecord::SchemaDumper.ignore_tables << 'inbox_response_sources'
+ActiveRecord::SchemaDumper.ignore_tables << 'article_embeddings'

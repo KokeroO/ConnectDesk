@@ -1,7 +1,6 @@
 default: &default
   adapter: postgresql
   encoding: unicode
-  schema_search_path: 'chatwoot,public'
   host: <%= ENV.fetch('POSTGRES_HOST', 'localhost') %>
   port: <%= ENV.fetch('POSTGRES_PORT', '5432') %>
    # ref: https://github.com/mperham/sidekiq/issues/2985#issuecomment-531097962

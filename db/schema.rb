@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_10_24_123832) do
+ActiveRecord::Schema[7.0].define(version: 2024_09_23_215335) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
   enable_extension "pg_trgm"
@@ -856,18 +856,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_10_24_123832) do
     t.index ["inbox_id"], name: "index_reporting_events_on_inbox_id"
     t.index ["name"], name: "index_reporting_events_on_name"
     t.index ["user_id"], name: "index_reporting_events_on_user_id"
-  end
-
-  create_table "responses_sources", id: :serial, force: :cascade do |t|
-    t.string "name", null: false
-    t.string "source_link"
-    t.string "source_model_type"
-    t.bigint "account_id", null: false
-    t.bigint "source_model_id"
-    t.integer "source_type", null: false
-    t.datetime "created_at", precision: nil, null: false
-    t.datetime "updated_at", precision: nil, null: false
-    t.index ["source_model_type", "source_model_id"], name: "index_response_sources_on_source_model"
   end
 
   create_table "sla_events", force: :cascade do |t|
