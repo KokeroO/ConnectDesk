@@ -5,7 +5,7 @@ class InitSchema < ActiveRecord::Migration[6.1]
     enable_extension "pg_trgm"
     enable_extension "pgcrypto"
     enable_extension "plpgsql"
-    create_table "access_tokens" do |t|
+    create_table "chatwoot.access_tokens" do |t|
       t.string "owner_type"
       t.bigint "owner_id"
       t.string "token"
@@ -14,7 +14,7 @@ class InitSchema < ActiveRecord::Migration[6.1]
       t.index ["owner_type", "owner_id"], name: "index_access_tokens_on_owner_type_and_owner_id"
       t.index ["token"], name: "index_access_tokens_on_token", unique: true
     end
-    create_table "account_users" do |t|
+    create_table "chatwoot.account_users" do |t|
       t.bigint "account_id"
       t.bigint "user_id"
       t.integer "role", default: 0
@@ -28,7 +28,7 @@ class InitSchema < ActiveRecord::Migration[6.1]
       t.index ["account_id"], name: "index_account_users_on_account_id"
       t.index ["user_id"], name: "index_account_users_on_user_id"
     end
-    create_table "accounts", id: :serial do |t|
+    create_table "chatwoot.accounts", id: :serial do |t|
       t.string "name", null: false
       t.datetime "created_at", precision: nil, null: false
       t.datetime "updated_at", precision: nil, null: false
@@ -42,7 +42,7 @@ class InitSchema < ActiveRecord::Migration[6.1]
       t.integer "status", default: 0
       t.index ["status"], name: "index_accounts_on_status"
     end
-    create_table "action_mailbox_inbound_emails" do |t|
+    create_table "chatwoot.action_mailbox_inbound_emails" do |t|
       t.integer "status", default: 0, null: false
       t.string "message_id", null: false
       t.string "message_checksum", null: false
@@ -50,7 +50,7 @@ class InitSchema < ActiveRecord::Migration[6.1]
       t.datetime "updated_at", null: false
       t.index ["message_id", "message_checksum"], name: "index_action_mailbox_inbound_emails_uniqueness", unique: true
     end
-    create_table "active_storage_attachments" do |t|
+    create_table "chatwoot.active_storage_attachments" do |t|
       t.string "name", null: false
       t.string "record_type", null: false
       t.bigint "record_id", null: false
@@ -59,7 +59,7 @@ class InitSchema < ActiveRecord::Migration[6.1]
       t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
       t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
     end
-    create_table "active_storage_blobs" do |t|
+    create_table "chatwoot.active_storage_blobs" do |t|
       t.string "key", null: false
       t.string "filename", null: false
       t.string "content_type"
@@ -70,12 +70,12 @@ class InitSchema < ActiveRecord::Migration[6.1]
       t.string "service_name", null: false
       t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
     end
-    create_table "active_storage_variant_records" do |t|
+    create_table "chatwoot.active_storage_variant_records" do |t|
       t.bigint "blob_id", null: false
       t.string "variation_digest", null: false
       t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
     end
-    create_table "agent_bot_inboxes" do |t|
+    create_table "chatwoot.agent_bot_inboxes" do |t|
       t.integer "inbox_id"
       t.integer "agent_bot_id"
       t.integer "status", default: 0
@@ -83,7 +83,7 @@ class InitSchema < ActiveRecord::Migration[6.1]
       t.datetime "updated_at", null: false
       t.integer "account_id"
     end
-    create_table "agent_bots" do |t|
+    create_table "chatwoot.agent_bots" do |t|
       t.string "name"
       t.string "description"
       t.string "outgoing_url"
@@ -94,7 +94,7 @@ class InitSchema < ActiveRecord::Migration[6.1]
       t.jsonb "bot_config", default: {}
       t.index ["account_id"], name: "index_agent_bots_on_account_id"
     end
-    create_table "articles" do |t|
+    create_table "chatwoot.articles" do |t|
       t.integer "account_id", null: false
       t.integer "portal_id", null: false
       t.integer "category_id"
@@ -115,7 +115,7 @@ class InitSchema < ActiveRecord::Migration[6.1]
       t.index ["author_id"], name: "index_articles_on_author_id"
       t.index ["slug"], name: "index_articles_on_slug", unique: true
     end
-    create_table "attachments", id: :serial do |t|
+    create_table "chatwoot.attachments", id: :serial do |t|
       t.integer "file_type", default: 0
       t.string "external_url"
       t.float "coordinates_lat", default: 0.0
@@ -129,7 +129,7 @@ class InitSchema < ActiveRecord::Migration[6.1]
       t.index ["account_id"], name: "index_attachments_on_account_id"
       t.index ["message_id"], name: "index_attachments_on_message_id"
     end
-    create_table "audits" do |t|
+    create_table "chatwoot.audits" do |t|
       t.bigint "auditable_id"
       t.string "auditable_type"
       t.bigint "associated_id"
@@ -150,7 +150,7 @@ class InitSchema < ActiveRecord::Migration[6.1]
       t.index ["request_uuid"], name: "index_audits_on_request_uuid"
       t.index ["user_id", "user_type"], name: "user_index"
     end
-    create_table "automation_rules" do |t|
+    create_table "chatwoot.automation_rules" do |t|
       t.bigint "account_id", null: false
       t.string "name", null: false
       t.text "description"
@@ -162,7 +162,7 @@ class InitSchema < ActiveRecord::Migration[6.1]
       t.boolean "active", default: true, null: false
       t.index ["account_id"], name: "index_automation_rules_on_account_id"
     end
-    create_table "campaigns" do |t|
+    create_table "chatwoot.campaigns" do |t|
       t.integer "display_id", null: false
       t.string "title", null: false
       t.text "description"
@@ -185,14 +185,14 @@ class InitSchema < ActiveRecord::Migration[6.1]
       t.index ["inbox_id"], name: "index_campaigns_on_inbox_id"
       t.index ["scheduled_at"], name: "index_campaigns_on_scheduled_at"
     end
-    create_table "canned_responses", id: :serial do |t|
+    create_table "chatwoot.canned_responses", id: :serial do |t|
       t.integer "account_id", null: false
       t.string "short_code"
       t.text "content"
       t.datetime "created_at", precision: nil, null: false
       t.datetime "updated_at", precision: nil, null: false
     end
-    create_table "categories" do |t|
+    create_table "chatwoot.categories" do |t|
       t.integer "account_id", null: false
       t.integer "portal_id", null: false
       t.string "name"
@@ -210,7 +210,7 @@ class InitSchema < ActiveRecord::Migration[6.1]
       t.index ["parent_category_id"], name: "index_categories_on_parent_category_id"
       t.index ["slug", "locale", "portal_id"], name: "index_categories_on_slug_and_locale_and_portal_id", unique: true
     end
-    create_table "channel_api" do |t|
+    create_table "chatwoot.channel_api" do |t|
       t.integer "account_id", null: false
       t.string "webhook_url"
       t.datetime "created_at", null: false
@@ -222,7 +222,7 @@ class InitSchema < ActiveRecord::Migration[6.1]
       t.index ["hmac_token"], name: "index_channel_api_on_hmac_token", unique: true
       t.index ["identifier"], name: "index_channel_api_on_identifier", unique: true
     end
-    create_table "channel_email" do |t|
+    create_table "chatwoot.channel_email" do |t|
       t.integer "account_id", null: false
       t.string "email", null: false
       t.string "forward_to_email", null: false
@@ -250,7 +250,7 @@ class InitSchema < ActiveRecord::Migration[6.1]
       t.index ["email"], name: "index_channel_email_on_email", unique: true
       t.index ["forward_to_email"], name: "index_channel_email_on_forward_to_email", unique: true
     end
-    create_table "channel_facebook_pages", id: :serial do |t|
+    create_table "chatwoot.channel_facebook_pages", id: :serial do |t|
       t.string "page_id", null: false
       t.string "user_access_token", null: false
       t.string "page_access_token", null: false
@@ -261,7 +261,7 @@ class InitSchema < ActiveRecord::Migration[6.1]
       t.index ["page_id", "account_id"], name: "index_channel_facebook_pages_on_page_id_and_account_id", unique: true
       t.index ["page_id"], name: "index_channel_facebook_pages_on_page_id"
     end
-    create_table "channel_line" do |t|
+    create_table "chatwoot.channel_line" do |t|
       t.integer "account_id", null: false
       t.string "line_channel_id", null: false
       t.string "line_channel_secret", null: false
@@ -270,7 +270,7 @@ class InitSchema < ActiveRecord::Migration[6.1]
       t.datetime "updated_at", null: false
       t.index ["line_channel_id"], name: "index_channel_line_on_line_channel_id", unique: true
     end
-    create_table "channel_sms" do |t|
+    create_table "chatwoot.channel_sms" do |t|
       t.integer "account_id", null: false
       t.string "phone_number", null: false
       t.string "provider", default: "default"
@@ -279,7 +279,7 @@ class InitSchema < ActiveRecord::Migration[6.1]
       t.datetime "updated_at", null: false
       t.index ["phone_number"], name: "index_channel_sms_on_phone_number", unique: true
     end
-    create_table "channel_telegram" do |t|
+    create_table "chatwoot.channel_telegram" do |t|
       t.string "bot_name"
       t.integer "account_id", null: false
       t.string "bot_token", null: false
@@ -287,7 +287,7 @@ class InitSchema < ActiveRecord::Migration[6.1]
       t.datetime "updated_at", null: false
       t.index ["bot_token"], name: "index_channel_telegram_on_bot_token", unique: true
     end
-    create_table "channel_twilio_sms" do |t|
+    create_table "chatwoot.channel_twilio_sms" do |t|
       t.string "phone_number"
       t.string "auth_token", null: false
       t.string "account_sid", null: false
@@ -300,7 +300,7 @@ class InitSchema < ActiveRecord::Migration[6.1]
       t.index ["messaging_service_sid"], name: "index_channel_twilio_sms_on_messaging_service_sid", unique: true
       t.index ["phone_number"], name: "index_channel_twilio_sms_on_phone_number", unique: true
     end
-    create_table "channel_twitter_profiles" do |t|
+    create_table "chatwoot.channel_twitter_profiles" do |t|
       t.string "profile_id", null: false
       t.string "twitter_access_token", null: false
       t.string "twitter_access_token_secret", null: false
@@ -310,7 +310,7 @@ class InitSchema < ActiveRecord::Migration[6.1]
       t.boolean "tweets_enabled", default: true
       t.index ["account_id", "profile_id"], name: "index_channel_twitter_profiles_on_account_id_and_profile_id", unique: true
     end
-    create_table "channel_web_widgets", id: :serial do |t|
+    create_table "chatwoot.channel_web_widgets", id: :serial do |t|
       t.string "website_url"
       t.integer "account_id"
       t.datetime "created_at", precision: nil, null: false
@@ -329,7 +329,7 @@ class InitSchema < ActiveRecord::Migration[6.1]
       t.index ["hmac_token"], name: "index_channel_web_widgets_on_hmac_token", unique: true
       t.index ["website_token"], name: "index_channel_web_widgets_on_website_token", unique: true
     end
-    create_table "channel_whatsapp" do |t|
+    create_table "chatwoot.channel_whatsapp" do |t|
       t.integer "account_id", null: false
       t.string "phone_number", null: false
       t.string "provider", default: "default"
@@ -340,7 +340,7 @@ class InitSchema < ActiveRecord::Migration[6.1]
       t.datetime "message_templates_last_updated", precision: nil
       t.index ["phone_number"], name: "index_channel_whatsapp_on_phone_number", unique: true
     end
-    create_table "contact_inboxes" do |t|
+    create_table "chatwoot.contact_inboxes" do |t|
       t.bigint "contact_id"
       t.bigint "inbox_id"
       t.string "source_id", null: false
@@ -354,7 +354,7 @@ class InitSchema < ActiveRecord::Migration[6.1]
       t.index ["pubsub_token"], name: "index_contact_inboxes_on_pubsub_token", unique: true
       t.index ["source_id"], name: "index_contact_inboxes_on_source_id"
     end
-    create_table "contacts", id: :serial do |t|
+    create_table "chatwoot.contacts", id: :serial do |t|
       t.string "name"
       t.string "email"
       t.string "phone_number"
@@ -372,7 +372,7 @@ class InitSchema < ActiveRecord::Migration[6.1]
       t.index ["identifier", "account_id"], name: "uniq_identifier_per_account_contact", unique: true
       t.index ["phone_number", "account_id"], name: "index_contacts_on_phone_number_and_account_id"
     end
-    create_table "conversation_participants" do |t|
+    create_table "chatwoot.conversation_participants" do |t|
       t.bigint "account_id", null: false
       t.bigint "user_id", null: false
       t.bigint "conversation_id", null: false
@@ -383,7 +383,7 @@ class InitSchema < ActiveRecord::Migration[6.1]
       t.index ["user_id", "conversation_id"], name: "index_conversation_participants_on_user_id_and_conversation_id", unique: true
       t.index ["user_id"], name: "index_conversation_participants_on_user_id"
     end
-    create_table "conversations", id: :serial do |t|
+    create_table "chatwoot.conversations", id: :serial do |t|
       t.integer "account_id", null: false
       t.integer "inbox_id", null: false
       t.integer "status", default: 0, null: false
@@ -423,7 +423,7 @@ class InitSchema < ActiveRecord::Migration[6.1]
       t.index ["team_id"], name: "index_conversations_on_team_id"
       t.index ["uuid"], name: "index_conversations_on_uuid", unique: true
     end
-    create_table "csat_survey_responses" do |t|
+    create_table "chatwoot.csat_survey_responses" do |t|
       t.bigint "account_id", null: false
       t.bigint "conversation_id", null: false
       t.bigint "message_id", null: false
@@ -439,7 +439,7 @@ class InitSchema < ActiveRecord::Migration[6.1]
       t.index ["conversation_id"], name: "index_csat_survey_responses_on_conversation_id"
       t.index ["message_id"], name: "index_csat_survey_responses_on_message_id", unique: true
     end
-    create_table "custom_attribute_definitions" do |t|
+    create_table "chatwoot.custom_attribute_definitions" do |t|
       t.string "attribute_display_name"
       t.string "attribute_key"
       t.integer "attribute_display_type", default: 0
@@ -453,7 +453,7 @@ class InitSchema < ActiveRecord::Migration[6.1]
       t.index ["account_id"], name: "index_custom_attribute_definitions_on_account_id"
       t.index ["attribute_key", "attribute_model", "account_id"], unique: true, name: 'attribute_key_model_index'
     end
-    create_table "custom_filters" do |t|
+    create_table "chatwoot.custom_filters" do |t|
       t.string "name", null: false
       t.integer "filter_type", default: 0, null: false
       t.jsonb "query", default: "{}", null: false
@@ -464,7 +464,7 @@ class InitSchema < ActiveRecord::Migration[6.1]
       t.index ["account_id"], name: "index_custom_filters_on_account_id"
       t.index ["user_id"], name: "index_custom_filters_on_user_id"
     end
-    create_table "dashboard_apps" do |t|
+    create_table "chatwoot.dashboard_apps" do |t|
       t.string "title", null: false
       t.jsonb "content", default: []
       t.bigint "account_id", null: false
@@ -474,7 +474,7 @@ class InitSchema < ActiveRecord::Migration[6.1]
       t.index ["account_id"], name: "index_dashboard_apps_on_account_id"
       t.index ["user_id"], name: "index_dashboard_apps_on_user_id"
     end
-    create_table "data_imports" do |t|
+    create_table "chatwoot.data_imports" do |t|
       t.bigint "account_id", null: false
       t.string "data_type", null: false
       t.integer "status", default: 0, null: false
@@ -485,7 +485,7 @@ class InitSchema < ActiveRecord::Migration[6.1]
       t.datetime "updated_at", null: false
       t.index ["account_id"], name: "index_data_imports_on_account_id"
     end
-    create_table "email_templates" do |t|
+    create_table "chatwoot.email_templates" do |t|
       t.string "name", null: false
       t.text "body", null: false
       t.integer "account_id"
@@ -495,14 +495,14 @@ class InitSchema < ActiveRecord::Migration[6.1]
       t.datetime "updated_at", null: false
       t.index ["name", "account_id"], name: "index_email_templates_on_name_and_account_id", unique: true
     end
-    create_table "folders" do |t|
+    create_table "chatwoot.folders" do |t|
       t.integer "account_id", null: false
       t.integer "category_id", null: false
       t.string "name"
       t.datetime "created_at", null: false
       t.datetime "updated_at", null: false
     end
-    create_table "inbox_members", id: :serial do |t|
+    create_table "chatwoot.inbox_members", id: :serial do |t|
       t.integer "user_id", null: false
       t.integer "inbox_id", null: false
       t.datetime "created_at", precision: nil, null: false
@@ -510,7 +510,7 @@ class InitSchema < ActiveRecord::Migration[6.1]
       t.index ["inbox_id", "user_id"], name: "index_inbox_members_on_inbox_id_and_user_id", unique: true
       t.index ["inbox_id"], name: "index_inbox_members_on_inbox_id"
     end
-    create_table "inboxes", id: :serial do |t|
+    create_table "chatwoot.inboxes", id: :serial do |t|
       t.integer "channel_id", null: false
       t.integer "account_id", null: false
       t.string "name", null: false
@@ -534,7 +534,7 @@ class InitSchema < ActiveRecord::Migration[6.1]
       t.index ["channel_id", "channel_type"], name: "index_inboxes_on_channel_id_and_channel_type"
       t.index ["portal_id"], name: "index_inboxes_on_portal_id"
     end
-    create_table "installation_configs" do |t|
+    create_table "chatwoot.installation_configs" do |t|
       t.string "name", null: false
       t.jsonb "serialized_value", default: {}, null: false
       t.datetime "created_at", null: false
@@ -543,7 +543,7 @@ class InitSchema < ActiveRecord::Migration[6.1]
       t.index ["name", "created_at"], name: "index_installation_configs_on_name_and_created_at", unique: true
       t.index ["name"], name: "index_installation_configs_on_name", unique: true
     end
-    create_table "integrations_hooks" do |t|
+    create_table "chatwoot.integrations_hooks" do |t|
       t.integer "status", default: 0
       t.integer "inbox_id"
       t.integer "account_id"
@@ -555,7 +555,7 @@ class InitSchema < ActiveRecord::Migration[6.1]
       t.datetime "updated_at", null: false
       t.jsonb "settings", default: {}
     end
-    create_table "labels" do |t|
+    create_table "chatwoot.labels" do |t|
       t.string "title"
       t.text "description"
       t.string "color", default: "#1f93ff", null: false
@@ -566,7 +566,7 @@ class InitSchema < ActiveRecord::Migration[6.1]
       t.index ["account_id"], name: "index_labels_on_account_id"
       t.index ["title", "account_id"], name: "index_labels_on_title_and_account_id", unique: true
     end
-    create_table "macros" do |t|
+    create_table "chatwoot.macros" do |t|
       t.bigint "account_id", null: false
       t.string "name", null: false
       t.integer "visibility", default: 0
@@ -577,7 +577,7 @@ class InitSchema < ActiveRecord::Migration[6.1]
       t.datetime "updated_at", null: false
       t.index ["account_id"], name: "index_macros_on_account_id"
     end
-    create_table "mentions" do |t|
+    create_table "chatwoot.mentions" do |t|
       t.bigint "user_id", null: false
       t.bigint "conversation_id", null: false
       t.bigint "account_id", null: false
@@ -589,7 +589,7 @@ class InitSchema < ActiveRecord::Migration[6.1]
       t.index ["user_id", "conversation_id"], name: "index_mentions_on_user_id_and_conversation_id", unique: true
       t.index ["user_id"], name: "index_mentions_on_user_id"
     end
-    create_table "messages", id: :serial do |t|
+    create_table "chatwoot.messages", id: :serial do |t|
       t.text "content"
       t.integer "account_id", null: false
       t.integer "inbox_id", null: false
@@ -615,7 +615,7 @@ class InitSchema < ActiveRecord::Migration[6.1]
       t.index ["sender_type", "sender_id"], name: "index_messages_on_sender_type_and_sender_id"
       t.index ["source_id"], name: "index_messages_on_source_id"
     end
-    create_table "notes" do |t|
+    create_table "chatwoot.notes" do |t|
       t.text "content", null: false
       t.bigint "account_id", null: false
       t.bigint "contact_id", null: false
@@ -626,7 +626,7 @@ class InitSchema < ActiveRecord::Migration[6.1]
       t.index ["contact_id"], name: "index_notes_on_contact_id"
       t.index ["user_id"], name: "index_notes_on_user_id"
     end
-    create_table "notification_settings" do |t|
+    create_table "chatwoot.notification_settings" do |t|
       t.integer "account_id"
       t.integer "user_id"
       t.integer "email_flags", default: 0, null: false
@@ -635,7 +635,7 @@ class InitSchema < ActiveRecord::Migration[6.1]
       t.integer "push_flags", default: 0, null: false
       t.index ["account_id", "user_id"], name: "by_account_user", unique: true
     end
-    create_table "notification_subscriptions" do |t|
+    create_table "chatwoot.notification_subscriptions" do |t|
       t.bigint "user_id", null: false
       t.integer "subscription_type", null: false
       t.jsonb "subscription_attributes", default: {}, null: false
@@ -645,7 +645,7 @@ class InitSchema < ActiveRecord::Migration[6.1]
       t.index ["identifier"], name: "index_notification_subscriptions_on_identifier", unique: true
       t.index ["user_id"], name: "index_notification_subscriptions_on_user_id"
     end
-    create_table "notifications" do |t|
+    create_table "chatwoot.notifications" do |t|
       t.bigint "account_id", null: false
       t.bigint "user_id", null: false
       t.integer "notification_type", null: false
@@ -661,7 +661,7 @@ class InitSchema < ActiveRecord::Migration[6.1]
       t.index ["secondary_actor_type", "secondary_actor_id"], name: "uniq_secondary_actor_per_account_notifications"
       t.index ["user_id"], name: "index_notifications_on_user_id"
     end
-    create_table "platform_app_permissibles" do |t|
+    create_table "chatwoot.platform_app_permissibles" do |t|
       t.bigint "platform_app_id", null: false
       t.string "permissible_type", null: false
       t.bigint "permissible_id", null: false
@@ -671,12 +671,12 @@ class InitSchema < ActiveRecord::Migration[6.1]
       t.index ["platform_app_id", "permissible_id", "permissible_type"], name: "unique_permissibles_index", unique: true
       t.index ["platform_app_id"], name: "index_platform_app_permissibles_on_platform_app_id"
     end
-    create_table "platform_apps" do |t|
+    create_table "chatwoot.platform_apps" do |t|
       t.string "name", null: false
       t.datetime "created_at", null: false
       t.datetime "updated_at", null: false
     end
-    create_table "portal_members" do |t|
+    create_table "chatwoot.portal_members" do |t|
       t.bigint "portal_id"
       t.bigint "user_id"
       t.datetime "created_at", null: false
@@ -684,7 +684,7 @@ class InitSchema < ActiveRecord::Migration[6.1]
       t.index ["portal_id", "user_id"], name: "index_portal_members_on_portal_id_and_user_id", unique: true
       t.index ["user_id", "portal_id"], name: "index_portal_members_on_user_id_and_portal_id", unique: true
     end
-    create_table "portals" do |t|
+    create_table "chatwoot.portals" do |t|
       t.integer "account_id", null: false
       t.string "name", null: false
       t.string "slug", null: false
@@ -700,14 +700,14 @@ class InitSchema < ActiveRecord::Migration[6.1]
       t.index ["custom_domain"], name: "index_portals_on_custom_domain", unique: true
       t.index ["slug"], name: "index_portals_on_slug", unique: true
     end
-    create_table "portals_members", id: false do |t|
+    create_table "chatwoot.portals_members", id: false do |t|
       t.bigint "portal_id", null: false
       t.bigint "user_id", null: false
       t.index ["portal_id", "user_id"], name: "index_portals_members_on_portal_id_and_user_id", unique: true
       t.index ["portal_id"], name: "index_portals_members_on_portal_id"
       t.index ["user_id"], name: "index_portals_members_on_user_id"
     end
-    create_table "related_categories" do |t|
+    create_table "chatwoot.related_categories" do |t|
       t.bigint "category_id"
       t.bigint "related_category_id"
       t.datetime "created_at", null: false
@@ -715,7 +715,7 @@ class InitSchema < ActiveRecord::Migration[6.1]
       t.index ["category_id", "related_category_id"], name: "index_related_categories_on_category_id_and_related_category_id", unique: true
       t.index ["related_category_id", "category_id"], name: "index_related_categories_on_related_category_id_and_category_id", unique: true
     end
-    create_table "reporting_events" do |t|
+    create_table "chatwoot.reporting_events" do |t|
       t.string "name"
       t.float "value"
       t.integer "account_id"
@@ -734,7 +734,7 @@ class InitSchema < ActiveRecord::Migration[6.1]
       t.index ["name"], name: "index_reporting_events_on_name"
       t.index ["user_id"], name: "index_reporting_events_on_user_id"
     end
-    create_table "taggings", id: :serial do |t|
+    create_table "chatwoot.taggings", id: :serial do |t|
       t.integer "tag_id"
       t.string "taggable_type"
       t.integer "taggable_id"
@@ -752,13 +752,13 @@ class InitSchema < ActiveRecord::Migration[6.1]
       t.index ["tagger_id", "tagger_type"], name: "index_taggings_on_tagger_id_and_tagger_type"
       t.index ["tagger_id"], name: "index_taggings_on_tagger_id"
     end
-    create_table "tags", id: :serial do |t|
+    create_table "chatwoot.tags", id: :serial do |t|
       t.string "name"
       t.integer "taggings_count", default: 0
       t.index "lower((name)::text) gin_trgm_ops", name: "tags_name_trgm_idx", using: :gin
       t.index ["name"], name: "index_tags_on_name", unique: true
     end
-    create_table "team_members" do |t|
+    create_table "chatwoot.team_members" do |t|
       t.bigint "team_id", null: false
       t.bigint "user_id", null: false
       t.datetime "created_at", null: false
@@ -767,7 +767,7 @@ class InitSchema < ActiveRecord::Migration[6.1]
       t.index ["team_id"], name: "index_team_members_on_team_id"
       t.index ["user_id"], name: "index_team_members_on_user_id"
     end
-    create_table "teams" do |t|
+    create_table "chatwoot.teams" do |t|
       t.string "name", null: false
       t.text "description"
       t.boolean "allow_auto_assign", default: true
@@ -777,14 +777,14 @@ class InitSchema < ActiveRecord::Migration[6.1]
       t.index ["account_id"], name: "index_teams_on_account_id"
       t.index ["name", "account_id"], name: "index_teams_on_name_and_account_id", unique: true
     end
-    create_table "telegram_bots", id: :serial do |t|
+    create_table "chatwoot.telegram_bots", id: :serial do |t|
       t.string "name"
       t.string "auth_key"
       t.integer "account_id"
       t.datetime "created_at", precision: nil, null: false
       t.datetime "updated_at", precision: nil, null: false
     end
-    create_table "users", id: :serial do |t|
+    create_table "chatwoot.users", id: :serial do |t|
       t.string "provider", default: "email", null: false
       t.string "uid", default: "", null: false
       t.string "encrypted_password", default: "", null: false
@@ -817,7 +817,7 @@ class InitSchema < ActiveRecord::Migration[6.1]
       t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
       t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
     end
-    create_table "webhooks" do |t|
+    create_table "chatwoot.webhooks" do |t|
       t.integer "account_id"
       t.integer "inbox_id"
       t.string "url"
@@ -827,7 +827,7 @@ class InitSchema < ActiveRecord::Migration[6.1]
       t.jsonb "subscriptions", default: ["conversation_status_changed", "conversation_updated", "conversation_created", "contact_created", "contact_updated", "message_created", "message_updated", "webwidget_triggered"]
       t.index ["account_id", "url"], name: "index_webhooks_on_account_id_and_url", unique: true
     end
-    create_table "working_hours" do |t|
+    create_table "chatwoot.working_hours" do |t|
       t.bigint "inbox_id"
       t.bigint "account_id"
       t.integer "day_of_week", null: false
