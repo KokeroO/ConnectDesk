@@ -18,7 +18,7 @@ db_seed:
 	RAILS_ENV=$(RAILS_ENV) bundle exec rails db:seed
 
 db_reset:
-	RAILS_ENV=$(RAILS_ENV) bundle exec rails db:reset
+	RAILS_ENV=$(RAILS_ENV) bundle exec rails db:reset --trace
 
 db:
 	RAILS_ENV=$(RAILS_ENV) bundle exec rails db:chatwoot_prepare

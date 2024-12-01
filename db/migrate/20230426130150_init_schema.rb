@@ -1,5 +1,6 @@
 class InitSchema < ActiveRecord::Migration[6.1]
   def up
+    ActiveRecord::Base.connection.execute("SET search_path TO #{ENV.fetch('SCHEMA', 'chatwoot')}")
     # These are extensions that must be enabled in order to support this database
     enable_extension "pg_stat_statements"
     enable_extension "pg_trgm"

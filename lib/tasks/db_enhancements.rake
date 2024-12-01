@@ -28,4 +28,14 @@ db_namespace = namespace :db do
       db_namespace['setup'].invoke
     end
   end
+  task :prepare_schema => :environment do
+    ActiveRecord::Base.connection.execute("CREATE SCHEMA IF NOT EXISTS chatwoot")
+  end
+
+  task reset: :prepare_schema do
+    Rake::Task["db:drop"].invoke
+    Rake::Task["db:create"].invoke
+    Rake::Task["db:migrate"].invoke
+    Rake::Task["db:seed"].invoke
+  end
 end
