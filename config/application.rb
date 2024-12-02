@@ -37,15 +37,7 @@ module Chatwoot
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.0
-
-    config.after_initialize do
-      begin
-        ActiveRecord::Base.connection.execute("SET search_path TO chatwoot, public")
-      rescue ActiveRecord::NoDatabaseError, PG::ConnectionBad
-        # Ignorar erro se o banco ainda não foi criado
-      end
-    end
-
+    config.active_record.schema_format = :sql
     config.eager_load_paths << Rails.root.join('lib')
     config.eager_load_paths << Rails.root.join('enterprise/lib')
     # rubocop:disable Rails/FilePath

@@ -18,8 +18,7 @@ db_namespace = namespace :db do
     ActiveRecord::Base.configurations.configs_for(env_name: Rails.env).each do |db_config|
       ActiveRecord::Base.establish_connection(db_config.configuration_hash)
       unless ActiveRecord::Base.connection.table_exists? 'ar_internal_metadata'
-        db_namespace['load_config'].invoke if ActiveRecord::Base.schema_format == :ruby
-        ActiveRecord::Tasks::DatabaseTasks.load_schema_current(:ruby, ENV.fetch('SCHEMA', nil))
+        db_namespace['load_config'].invoke if ActiveRecord::Base.schema_format == :sql
         db_namespace['seed'].invoke
       end
 
@@ -28,14 +27,16 @@ db_namespace = namespace :db do
       db_namespace['setup'].invoke
     end
   end
-  task :prepare_schema => :environment do
-    ActiveRecord::Base.connection.execute("CREATE SCHEMA IF NOT EXISTS chatwoot")
-  end
 
-  task reset: :prepare_schema do
+  task chatwoot_reset: :environment do
+    schema = ENV.fetch('SCHEMA', 'chatwoot')
+    ActiveRecord::Base.connection.execute("SET search_path TO #{schema}")
     Rake::Task["db:drop"].invoke
     Rake::Task["db:create"].invoke
-    Rake::Task["db:migrate"].invoke
-    Rake::Task["db:seed"].invoke
+    ActiveRecord::Base.configurations.configs_for(env_name: Rails.env).each do |db_config|
+      ActiveRecord::Base.establish_connection(db_config.configuration_hash)
+      Rake::Task["db:migrate"].invoke
+      Rake::Task["db:seed"].invoke
+    end
   end
 end

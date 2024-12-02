@@ -113,6 +113,8 @@ class Conversation < ApplicationRecord
 
   delegate :auto_resolve_duration, to: :account
 
+  acts_as_taggable_on :labels
+
   def can_reply?
     channel = inbox&.channel
 
