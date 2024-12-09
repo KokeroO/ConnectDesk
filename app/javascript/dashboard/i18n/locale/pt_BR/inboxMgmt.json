@@ -160,7 +160,7 @@
         }
       },
       "BAILEYS_EVOLUTION": {
-        "TITLE": "Canal do WhatsApp",
+        "TITLE": "Canal do WhatsApp (Baileys)",
         "DESC": "Acesse o Whattsap através da API Baileys.",
         "CHANNEL_NAME": {
           "LABEL": "Nome da Caixa de Entrada",
@@ -172,7 +172,7 @@
           "PLACEHOLDER": "Por favor, insira o número de telefone do qual a mensagem será enviada.",
           "ERROR": "Por favor, forneça um número de telefone válido que comece com o símbolo \"+\" e não contenha espaços."
         },
-        "SUBMIT_BUTTON": "Criar canal do WhatsApp",
+        "SUBMIT_BUTTON": "Criar canal do WhatsApp (Baileys)",
         "API": {
           "ERROR_MESSAGE": "Não fomos capazes de criar a instancia, por favor, tente novamente"
         }

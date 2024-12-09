@@ -1,6 +1,17 @@
 import Auth from '../api/auth';
+import {
+  clearCookiesOnLogout,
+  deleteIndexedDBOnLogout,
+} from '../store/utils/api';
 
-const parseErrorCode = error => Promise.reject(error);
+const parseErrorCode = error => {
+  if (error.response && error.response.status === 401) {
+    deleteIndexedDBOnLogout();
+    clearCookiesOnLogout();
+    window.location.assign('/app/login');
+  }
+  return Promise.reject(error);
+};
 
 export default axios => {
   const { apiHost = '' } = window.chatwootConfig || {};
@@ -24,7 +35,10 @@ export default axios => {
   }
   // Response parsing interceptor
   wootApi.interceptors.response.use(
-    response => response,
+    response => {
+      localStorage.setItem('last_activity_at', Date.now());
+      return response;
+    },
     error => parseErrorCode(error)
   );
   return wootApi;

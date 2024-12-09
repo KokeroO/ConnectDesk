@@ -40,6 +40,9 @@ module Chatwoot
     config.active_record.schema_format = :sql
     config.eager_load_paths << Rails.root.join('lib')
     config.eager_load_paths << Rails.root.join('enterprise/lib')
+    config.time_zone = 'America/Sao_Paulo'
+    config.active_record.default_timezone = :local
+
     # rubocop:disable Rails/FilePath
     config.eager_load_paths += Dir["#{Rails.root}/enterprise/app/**"]
     # rubocop:enable Rails/FilePath

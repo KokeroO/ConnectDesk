@@ -196,6 +196,13 @@ export const actions = {
       // Ignore error
     }
   },
+  setPresenceSession: async () => {
+    try {
+      await authAPI.setPresenceSession();
+    } catch (error) {
+      // Ignore error
+    }
+  },
 };
 
 // mutations

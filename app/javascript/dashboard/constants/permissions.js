@@ -15,6 +15,8 @@ export const CONVERSATION_PERMISSIONS = [
   'conversation_participating_manage',
 ];
 
+export const GENERAL_PREFERENCES = ['activity_message_view'];
+
 export const MANAGE_ALL_CONVERSATION_PERMISSIONS = 'conversation_manage';
 
 export const CONVERSATION_UNASSIGNED_PERMISSIONS =

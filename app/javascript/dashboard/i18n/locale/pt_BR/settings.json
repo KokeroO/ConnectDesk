@@ -83,6 +83,13 @@
           "CONDITION_TWO": "Enviar alertas a cada 30 segundos até que todas as conversas atribuídas sejam lidas"
         }
       },
+      "GENERAL_PREFERENCES_SECTION": {
+        "TITLE": "Preferencias gerais",
+        "NOTE": "Altera comportamentos gerais na aplicação."
+      },
+      "GENERAL_PREFERENCES": {
+        "ACTIVITY_MESSAGE": "Ative as mensagens de atividade na conversa"
+      },
       "EMAIL_NOTIFICATIONS_SECTION": {
         "TITLE": "Notificações por e-mail",
         "NOTE": "Atualize suas preferências de notificação por e-mail aqui",
@@ -191,7 +198,9 @@
     "TRAIL_BUTTON": "Comprar agora",
     "DELETED_USER": "Deletar Usuário",
     "EMAIL_VERIFICATION_PENDING": "Parece que você ainda não verificou seu endereço de e-mail. Por favor, verifique sua caixa de entrada pelo e-mail de verificação.",
+    "SESSION_EXPIRATION": "Por conta de inatividade do usuário. A sua sessão está prestes a expirar em {time}.",
     "RESEND_VERIFICATION_MAIL": "Reenviar email de verificação",
+    "SET_PRESENCE_SESSION": "Estou aqui",
     "EMAIL_VERIFICATION_SENT": "O e-mail de verificação foi enviado. Por favor, verifique sua caixa de entrada.",
     "ACCOUNT_SUSPENDED": {
       "TITLE": "Conta Suspensa",

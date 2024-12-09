@@ -237,6 +237,9 @@ export default {
         'has-bg': this.showBackgroundHighlight,
       };
     },
+    isActivity() {
+      return this.data.message_type === 2;
+    },
     createdAt() {
       return this.contentAttributes.external_created_at || this.data.created_at;
     },
@@ -442,7 +445,7 @@ export default {
 <!-- eslint-disable-next-line vue/no-root-v-if -->
 <template>
   <li
-    v-if="shouldRenderMessage"
+    v-if="shouldRenderMessage && !isActivity"
     :id="`message${data.id}`"
     class="group/context-menu"
     :class="[alignBubble]"

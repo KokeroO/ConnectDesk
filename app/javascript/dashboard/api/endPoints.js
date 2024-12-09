@@ -51,6 +51,10 @@ const endPoints = {
   resendConfirmation: {
     url: '/api/v1/profile/resend_confirmation',
   },
+
+  setPresenceSession: {
+    url: '/api/v1/profile/set_presence_session',
+  },
 };
 
 export default page => {

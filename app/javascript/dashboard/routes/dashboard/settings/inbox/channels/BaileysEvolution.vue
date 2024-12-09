@@ -1,4 +1,3 @@
-<!-- Deprecated in favour of separate files for SMS and Whatsapp and also to implement new providers for each platform in the future-->
 <script>
 import { mapGetters } from 'vuex';
 import { useVuelidate } from '@vuelidate/core';
@@ -104,7 +103,7 @@ export default {
       } catch (error) {
         const errorMessage =
           parseAPIErrorResponse(error) ||
-          this.$t('INBOX_MGMT.ADD.TWILIO.API.ERROR_MESSAGE');
+          this.$t('INBOX_MGMT.ADD.BAILEYS_EVOLUTION.API.ERROR_MESSAGE');
         useAlert(errorMessage);
       }
     },
@@ -116,15 +115,17 @@ export default {
   <form class="flex flex-wrap mx-0" @submit.prevent="createChannel()">
     <div class="w-[65%] flex-shrink-0 flex-grow-0 max-w-[65%]">
       <label :class="{ error: v$.channelName.$error }">
-        {{ $t('INBOX_MGMT.ADD.TWILIO.CHANNEL_NAME.LABEL') }}
+        {{ $t('INBOX_MGMT.ADD.BAILEYS_EVOLUTION.CHANNEL_NAME.LABEL') }}
         <input
           v-model="channelName"
           type="text"
-          :placeholder="$t('INBOX_MGMT.ADD.TWILIO.CHANNEL_NAME.PLACEHOLDER')"
+          :placeholder="
+            $t('INBOX_MGMT.ADD.BAILEYS_EVOLUTION.CHANNEL_NAME.PLACEHOLDER')
+          "
           @blur="v$.channelName.$touch"
         />
         <span v-if="v$.channelName.$error" class="message">{{
-          $t('INBOX_MGMT.ADD.TWILIO.CHANNEL_NAME.ERROR')
+          $t('INBOX_MGMT.ADD.BAILEYS_EVOLUTION.CHANNEL_NAME.ERROR')
         }}</span>
       </label>
     </div>
@@ -134,17 +135,19 @@ export default {
         v-if="useMessagingService"
         :class="{ error: v$.messagingServiceSID.$error }"
       >
-        {{ $t('INBOX_MGMT.ADD.TWILIO.MESSAGING_SERVICE_SID.LABEL') }}
+        {{ $t('INBOX_MGMT.ADD.BAILEYS_EVOLUTION.MESSAGING_SERVICE_SID.LABEL') }}
         <input
           v-model="messagingServiceSID"
           type="text"
           :placeholder="
-            $t('INBOX_MGMT.ADD.TWILIO.MESSAGING_SERVICE_SID.PLACEHOLDER')
+            $t(
+              'INBOX_MGMT.ADD.BAILEYS_EVOLUTION.MESSAGING_SERVICE_SID.PLACEHOLDER'
+            )
           "
           @blur="v$.messagingServiceSID.$touch"
         />
         <span v-if="v$.messagingServiceSID.$error" class="message">{{
-          $t('INBOX_MGMT.ADD.TWILIO.MESSAGING_SERVICE_SID.ERROR')
+          $t('INBOX_MGMT.ADD.BAILEYS_EVOLUTION.MESSAGING_SERVICE_SID.ERROR')
         }}</span>
       </label>
     </div>
@@ -154,15 +157,17 @@ export default {
       class="w-[65%] flex-shrink-0 flex-grow-0 max-w-[65%]"
     >
       <label :class="{ error: v$.phoneNumber.$error }">
-        {{ $t('INBOX_MGMT.ADD.TWILIO.PHONE_NUMBER.LABEL') }}
+        {{ $t('INBOX_MGMT.ADD.BAILEYS_EVOLUTION.PHONE_NUMBER.LABEL') }}
         <input
           v-model="phoneNumber"
           type="text"
-          :placeholder="$t('INBOX_MGMT.ADD.TWILIO.PHONE_NUMBER.PLACEHOLDER')"
+          :placeholder="
+            $t('INBOX_MGMT.ADD.BAILEYS_EVOLUTION.PHONE_NUMBER.PLACEHOLDER')
+          "
           @blur="v$.phoneNumber.$touch"
         />
         <span v-if="v$.phoneNumber.$error" class="message">{{
-          $t('INBOX_MGMT.ADD.TWILIO.PHONE_NUMBER.ERROR')
+          $t('INBOX_MGMT.ADD.BAILEYS_EVOLUTION.PHONE_NUMBER.ERROR')
         }}</span>
       </label>
     </div>
@@ -177,7 +182,7 @@ export default {
         />
         {{
           $t(
-            'INBOX_MGMT.ADD.TWILIO.MESSAGING_SERVICE_SID.USE_MESSAGING_SERVICE'
+            'INBOX_MGMT.ADD.BAILEYS_EVOLUTION.MESSAGING_SERVICE_SID.USE_MESSAGING_SERVICE'
           )
         }}
       </label>
@@ -185,15 +190,17 @@ export default {
 
     <div class="w-[65%] flex-shrink-0 flex-grow-0 max-w-[65%]">
       <label :class="{ error: v$.accountSID.$error }">
-        {{ $t('INBOX_MGMT.ADD.TWILIO.ACCOUNT_SID.LABEL') }}
+        {{ $t('INBOX_MGMT.ADD.BAILEYS_EVOLUTION.ACCOUNT_SID.LABEL') }}
         <input
           v-model="accountSID"
           type="text"
-          :placeholder="$t('INBOX_MGMT.ADD.TWILIO.ACCOUNT_SID.PLACEHOLDER')"
+          :placeholder="
+            $t('INBOX_MGMT.ADD.BAILEYS_EVOLUTION.ACCOUNT_SID.PLACEHOLDER')
+          "
           @blur="v$.accountSID.$touch"
         />
         <span v-if="v$.accountSID.$error" class="message">{{
-          $t('INBOX_MGMT.ADD.TWILIO.ACCOUNT_SID.ERROR')
+          $t('INBOX_MGMT.ADD.BAILEYS_EVOLUTION.ACCOUNT_SID.ERROR')
         }}</span>
       </label>
     </div>
@@ -205,36 +212,40 @@ export default {
           type="checkbox"
           class="checkbox"
         />
-        {{ $t('INBOX_MGMT.ADD.TWILIO.API_KEY.USE_API_KEY') }}
+        {{ $t('INBOX_MGMT.ADD.BAILEYS_EVOLUTION.API_KEY.USE_API_KEY') }}
       </label>
     </div>
     <div v-if="useAPIKey" class="w-[65%] flex-shrink-0 flex-grow-0 max-w-[65%]">
       <label :class="{ error: v$.apiKeySID.$error }">
-        {{ $t('INBOX_MGMT.ADD.TWILIO.API_KEY.LABEL') }}
+        {{ $t('INBOX_MGMT.ADD.BAILEYS_EVOLUTION.API_KEY.LABEL') }}
         <input
           v-model="apiKeySID"
           type="text"
-          :placeholder="$t('INBOX_MGMT.ADD.TWILIO.API_KEY.PLACEHOLDER')"
+          :placeholder="
+            $t('INBOX_MGMT.ADD.BAILEYS_EVOLUTION.API_KEY.PLACEHOLDER')
+          "
           @blur="v$.apiKeySID.$touch"
         />
         <span v-if="v$.apiKeySID.$error" class="message">{{
-          $t('INBOX_MGMT.ADD.TWILIO.API_KEY.ERROR')
+          $t('INBOX_MGMT.ADD.BAILEYS_EVOLUTION.API_KEY.ERROR')
         }}</span>
       </label>
     </div>
     <div class="w-[65%] flex-shrink-0 flex-grow-0 max-w-[65%]">
       <label :class="{ error: v$.authToken.$error }">
-        {{ $t(`INBOX_MGMT.ADD.TWILIO.${authTokeni18nKey}.LABEL`) }}
+        {{ $t(`INBOX_MGMT.ADD.BAILEYS_EVOLUTION.${authTokeni18nKey}.LABEL`) }}
         <input
           v-model="authToken"
           type="text"
           :placeholder="
-            $t(`INBOX_MGMT.ADD.TWILIO.${authTokeni18nKey}.PLACEHOLDER`)
+            $t(
+              `INBOX_MGMT.ADD.BAILEYS_EVOLUTION.${authTokeni18nKey}.PLACEHOLDER`
+            )
           "
           @blur="v$.authToken.$touch"
         />
         <span v-if="v$.authToken.$error" class="message">
-          {{ $t(`INBOX_MGMT.ADD.TWILIO.${authTokeni18nKey}.ERROR`) }}
+          {{ $t(`INBOX_MGMT.ADD.BAILEYS_EVOLUTION.${authTokeni18nKey}.ERROR`) }}
         </span>
       </label>
     </div>
@@ -242,7 +253,7 @@ export default {
     <div class="w-full">
       <woot-submit-button
         :loading="uiFlags.isCreating"
-        :button-text="$t('INBOX_MGMT.ADD.TWILIO.SUBMIT_BUTTON')"
+        :button-text="$t('INBOX_MGMT.ADD.BAILEYS_EVOLUTION.SUBMIT_BUTTON')"
       />
     </div>
   </form>

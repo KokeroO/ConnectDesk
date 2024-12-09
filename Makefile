@@ -39,6 +39,9 @@ run:
 		overmind start -f Procfile.dev; \
 	fi
 
+run_f:
+	foreman start -f Procfile.dev;
+
 force_run:
 	rm -f ./.overmind.sock
 	overmind start -f Procfile.dev

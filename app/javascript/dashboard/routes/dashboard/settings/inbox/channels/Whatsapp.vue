@@ -47,7 +47,7 @@ export default {
     </div>
 
     <BaileysEvolution v-if="provider === 'baileys_evolution'" type="whatsapp" />
-    <Twilio v-if="provider === 'twilio'" type="whatsapp" />
+    <Twilio v-else-if="provider === 'twilio'" type="whatsapp" />
     <ThreeSixtyDialogWhatsapp v-else-if="provider === '360dialog'" />
     <CloudWhatsapp v-else />
   </div>

@@ -102,4 +102,8 @@ export default {
     const urlData = endPoints('resendConfirmation');
     return axios.post(urlData.url);
   },
+  setPresenceSession() {
+    const urlData = endPoints('setPresenceSession');
+    return axios.post(urlData.url);
+  },
 };

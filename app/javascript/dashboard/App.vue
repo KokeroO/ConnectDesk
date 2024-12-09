@@ -7,6 +7,7 @@ import UpdateBanner from './components/app/UpdateBanner.vue';
 import UpgradeBanner from './components/app/UpgradeBanner.vue';
 import PaymentPendingBanner from './components/app/PaymentPendingBanner.vue';
 import PendingEmailVerificationBanner from './components/app/PendingEmailVerificationBanner.vue';
+import SessionExpirationBanner from './components/app/SessionExpirationBanner.vue';
 import vueActionCable from './helper/actionCable';
 import { useRouter } from 'vue-router';
 import { useStore } from 'dashboard/composables/store';
@@ -32,6 +33,7 @@ export default {
     WootSnackbarBox,
     UpgradeBanner,
     PendingEmailVerificationBanner,
+    SessionExpirationBanner,
   },
   setup() {
     const router = useRouter();
@@ -136,6 +138,7 @@ export default {
   >
     <UpdateBanner :latest-chatwoot-version="latestChatwootVersion" />
     <template v-if="currentAccountId">
+      <SessionExpirationBanner v-if="hideOnOnboardingView" />
       <PendingEmailVerificationBanner v-if="hideOnOnboardingView" />
       <PaymentPendingBanner v-if="hideOnOnboardingView" />
       <UpgradeBanner />

@@ -20,6 +20,7 @@ class DeviseOverrides::SessionsController < DeviseTokenAuth::SessionsController
   end
 
   def render_create_success
+    redis_set_last_activity
     render partial: 'devise/auth', formats: [:json], locals: { resource: @resource }
   end
 

@@ -37,6 +37,10 @@ class Api::V1::ProfilesController < Api::BaseController
     @user.send_confirmation_instructions unless @user.confirmed?
     head :ok
   end
+  
+  def set_presence_session
+    head :ok
+  end
 
   private
 

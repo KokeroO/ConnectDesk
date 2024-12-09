@@ -13,12 +13,14 @@ import HotKeyCard from './HotKeyCard.vue';
 import ChangePassword from './ChangePassword.vue';
 import NotificationPreferences from './NotificationPreferences.vue';
 import AudioNotifications from './AudioNotifications.vue';
+import GeneralPreferences from './GeneralPreferences.vue';
 import FormSection from 'dashboard/components/FormSection.vue';
 import AccessToken from './AccessToken.vue';
 import Policy from 'dashboard/components/policy.vue';
 import {
   ROLES,
   CONVERSATION_PERMISSIONS,
+  GENERAL_PREFERENCES,
 } from 'dashboard/constants/permissions.js';
 
 export default {
@@ -32,6 +34,7 @@ export default {
     ChangePassword,
     NotificationPreferences,
     AudioNotifications,
+    GeneralPreferences,
     AccessToken,
   },
   mixins: [globalConfigMixin],
@@ -80,6 +83,7 @@ export default {
       ],
       notificationPermissions: [...ROLES, ...CONVERSATION_PERMISSIONS],
       audioNotificationPermissions: [...ROLES, ...CONVERSATION_PERMISSIONS],
+      generalPreferencesPermissions: [...ROLES, ...GENERAL_PREFERENCES],
     };
   },
   computed: {
@@ -242,6 +246,16 @@ export default {
     >
       <ChangePassword />
     </FormSection>
+    <Policy :permissions="generalPreferencesPermissions">
+      <FormSection
+        :title="$t('PROFILE_SETTINGS.FORM.GENERAL_PREFERENCES_SECTION.TITLE')"
+        :description="
+          $t('PROFILE_SETTINGS.FORM.GENERAL_PREFERENCES_SECTION.NOTE')
+        "
+      >
+        <GeneralPreferences />
+      </FormSection>
+    </Policy>
     <Policy :permissions="audioNotificationPermissions">
       <FormSection
         :title="$t('PROFILE_SETTINGS.FORM.AUDIO_NOTIFICATIONS_SECTION.TITLE')"
