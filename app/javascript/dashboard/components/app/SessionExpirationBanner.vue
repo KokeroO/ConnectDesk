@@ -1,9 +1,17 @@
 <script>
 import Banner from 'dashboard/components/ui/Banner.vue';
 import Auth from 'dashboard/api/auth';
+import { useUISettings } from 'dashboard/composables/useUISettings';
 
 export default {
   components: { Banner },
+  setup() {
+    const { uiSettings } = useUISettings();
+
+    return {
+      uiSettings,
+    };
+  },
   data() {
     return {
       showBanner: false,
@@ -24,7 +32,7 @@ export default {
     },
   },
   mounted() {
-    setInterval(this.checkSession, 1000); // Verifica a cada segundo
+    setInterval(this.checkSession, 1000);
   },
   methods: {
     setPresence() {
@@ -33,25 +41,29 @@ export default {
     },
     checkSession() {
       const lastActivityAt = parseInt(
-        localStorage.getItem('last_activity_at'),
+        sessionStorage.getItem('last_activity_at'),
         10
       );
-      if (!lastActivityAt) return;
+      if (!lastActivityAt || this.uiSettings.session_time === 'none') return;
 
       const elapsedTime = Date.now() - lastActivityAt;
-      this.remainingTime = Math.max(1800000 - elapsedTime, 0);
+      this.remainingTime = Math.max(
+        this.uiSettings.session_time * 60000 - elapsedTime,
+        0
+      );
 
       if (this.remainingTime <= 60000 && !this.showBanner) {
         this.showBanner = true;
       }
 
       if (this.remainingTime <= 0) {
+        sessionStorage.removeItem('last_activity_at');
         Auth.logout();
       }
     },
     renewSession() {
       this.showBanner = false;
-      localStorage.setItem('last_activity_at', Date.now());
+      sessionStorage.setItem('last_activity_at', Date.now());
     },
     formatTime(ms) {
       const seconds = Math.floor(ms / 1000);

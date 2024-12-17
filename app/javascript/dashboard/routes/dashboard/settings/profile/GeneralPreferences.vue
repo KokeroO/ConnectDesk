@@ -1,51 +1,41 @@
 <script>
 import { mapGetters } from 'vuex';
 import { useAlert } from 'dashboard/composables';
+import { useUISettings } from 'dashboard/composables/useUISettings';
 import {
   hasPushPermissions,
   requestPushPermissions,
   verifyServiceWorkerExistence,
 } from 'dashboard/helper/pushHelper.js';
-import { FEATURE_FLAGS } from 'dashboard/featureFlags';
 import FormSwitch from 'v3/components/Form/Switch.vue';
-import { NOTIFICATION_TYPES } from './constants';
+import GeneralPreferencesSession from './GeneralPreferencesSession.vue';
 
 export default {
   components: {
     FormSwitch,
+    GeneralPreferencesSession,
+  },
+  setup() {
+    const { uiSettings, updateUISettings } = useUISettings();
+
+    return {
+      uiSettings,
+      updateUISettings,
+    };
   },
   data() {
     return {
-      selectedEmailFlags: [],
-      selectedPushFlags: [],
-      enableAudioAlerts: false,
-      hasEnabledPushPermissions: false,
-      notificationTypes: NOTIFICATION_TYPES,
+      activityMessageView: this.uiSettings.activity_message_view,
+      sessionTime: this.uiSettings.session_time,
     };
   },
   computed: {
     ...mapGetters({
-      accountId: 'getCurrentAccountId',
       emailFlags: 'userNotificationSettings/getSelectedEmailFlags',
       pushFlags: 'userNotificationSettings/getSelectedPushFlags',
-      isFeatureEnabledonAccount: 'accounts/isFeatureEnabledonAccount',
     }),
     hasPushAPISupport() {
       return !!('Notification' in window);
-    },
-    isSLAEnabled() {
-      return this.isFeatureEnabledonAccount(this.accountId, FEATURE_FLAGS.SLA);
-    },
-    filteredNotificationTypes() {
-      return this.notificationTypes.filter(notification =>
-        this.isSLAEnabled
-          ? true
-          : ![
-              'sla_missed_first_response',
-              'sla_missed_next_response',
-              'sla_missed_resolution',
-            ].includes(notification.value)
-      );
     },
   },
   watch: {
@@ -69,7 +59,7 @@ export default {
       return selectedFlags.includes(`${type}_${flagType}`);
     },
     onRegistrationSuccess() {
-      this.hasEnabledPushPermissions = true;
+      this.hasActivityMessageView = true;
     },
     onRequestPermissions() {
       requestPushPermissions({
@@ -91,11 +81,11 @@ export default {
           .catch(error => console.log(error))
       );
     },
-    async updateNotificationSettings() {
+    async updateGeneralSettings() {
       try {
-        this.$store.dispatch('userNotificationSettings/update', {
-          selectedEmailFlags: this.selectedEmailFlags,
-          selectedPushFlags: this.selectedPushFlags,
+        this.$store.dispatch('userGeneralSettings/update', {
+          sessionTime: this.sessionTime,
+          activityMessageView: this.activityMessageView,
         });
         useAlert(this.$t('PROFILE_SETTINGS.FORM.API.UPDATE_SUCCESS'));
       } catch (error) {
@@ -103,15 +93,7 @@ export default {
       }
     },
     handleInput(type, id) {
-      if (type === 'email') {
-        this.handleEmailInput(id);
-      } else {
-        this.handlePushInput(id);
-      }
-    },
-    handleEmailInput(id) {
-      this.selectedEmailFlags = this.toggleInput(this.selectedEmailFlags, id);
-      this.updateNotificationSettings();
+      this.handlePushInput(id);
     },
     handlePushInput(id) {
       this.selectedPushFlags = this.toggleInput(this.selectedPushFlags, id);
@@ -124,28 +106,53 @@ export default {
       }
       return [...selected, current];
     },
+    sessionTimeChange(value) {
+      this.sessionTime = value;
+      this.updateUISettings({
+        session_time: this.sessionTime,
+      });
+      useAlert(this.$t('PROFILE_SETTINGS.FORM.API.UPDATE_SUCCESS'));
+    },
+    activityMessageViewChange(value) {
+      this.activityMessageView = value;
+      this.updateUISettings({
+        activity_message_view: this.activityMessageView,
+      });
+      useAlert(this.$t('PROFILE_SETTINGS.FORM.API.UPDATE_SUCCESS'));
+    },
   },
 };
 </script>
 
 <template>
   <div id="profile-general-preferences" class="flex flex-col gap-6">
+    <GeneralPreferencesSession
+      :label="
+        $t('PROFILE_SETTINGS.FORM.GENERAL_PREFERENCES_SECTION.SESSION.TITLE')
+      "
+      :value="sessionTime"
+      @update="sessionTimeChange"
+    />
     <div
       class="flex items-center justify-between w-full gap-2 p-4 border border-solid border-ash-200 rounded-xl"
     >
       <div class="flex flex-row items-center gap-2">
         <fluent-icon
-          icon="alert"
+          icon="block"
           class="flex-shrink-0 text-ash-900"
           size="18"
         />
         <span class="text-sm text-ash-900">
-          {{ $t('PROFILE_SETTINGS.FORM.GENERAL_PREFERENCES.ACTIVITY_MESSAGE') }}
+          {{
+            $t(
+              'PROFILE_SETTINGS.FORM.GENERAL_PREFERENCES_SECTION.ACTIVITY_MESSAGE'
+            )
+          }}
         </span>
       </div>
       <FormSwitch
-        :model-value="hasActivityMessageView"
-        @update:model-value="onUpdateGeneral"
+        :model-value="activityMessageView"
+        @update:model-value="activityMessageViewChange"
       />
     </div>
   </div>

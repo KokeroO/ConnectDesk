@@ -36,7 +36,13 @@ export default axios => {
   // Response parsing interceptor
   wootApi.interceptors.response.use(
     response => {
-      localStorage.setItem('last_activity_at', Date.now());
+      const lastActivityAt = parseInt(
+        sessionStorage.getItem('last_activity_at'),
+        10
+      );
+      if (lastActivityAt) {
+        sessionStorage.setItem('last_activity_at', Date.now());
+      }
       return response;
     },
     error => parseErrorCode(error)

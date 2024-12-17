@@ -20,6 +20,7 @@ import {
   verifyServiceWorkerExistence,
 } from './helper/pushHelper';
 import ReconnectService from 'dashboard/helper/ReconnectService';
+import Auth from 'dashboard/api/auth';
 
 export default {
   name: 'App',
@@ -47,6 +48,7 @@ export default {
       showAddAccountModal: false,
       latestChatwootVersion: null,
       reconnectService: null,
+      remainingTime: 0,
     };
   },
   computed: {
@@ -82,6 +84,7 @@ export default {
     },
   },
   mounted() {
+    this.checkSession();
     this.initializeColorTheme();
     this.listenToThemeChanges();
     this.setLocale(window.chatwootConfig.selectedLocale);
@@ -92,6 +95,24 @@ export default {
     }
   },
   methods: {
+    checkSession() {
+      const lastActivityAt = parseInt(
+        sessionStorage.getItem('last_activity_at'),
+        10
+      );
+      if (!lastActivityAt) {
+        Auth.logout();
+      }
+
+      const elapsedTime = Date.now() - lastActivityAt;
+      const remainingTime = Math.max(30 * 60000 - elapsedTime, 0);
+      if (remainingTime <= 0) {
+        Auth.logout();
+        return '';
+      }
+      sessionStorage.setItem('last_activity_at', Date.now());
+      return '';
+    },
     initializeColorTheme() {
       setColorTheme(window.matchMedia('(prefers-color-scheme: dark)').matches);
     },

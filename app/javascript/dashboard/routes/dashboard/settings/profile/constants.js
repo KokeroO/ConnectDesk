@@ -50,3 +50,18 @@ export const ALERT_EVENTS = [
     label: 'all',
   },
 ];
+
+export const SESSION_TIMES = [
+  {
+    value: '15',
+    label: '15',
+  },
+  {
+    value: '30',
+    label: '30',
+  },
+  {
+    value: 'none',
+    label: 'none',
+  },
+];

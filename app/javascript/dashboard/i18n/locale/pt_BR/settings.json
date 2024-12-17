@@ -85,10 +85,16 @@
       },
       "GENERAL_PREFERENCES_SECTION": {
         "TITLE": "Preferencias gerais",
-        "NOTE": "Altera comportamentos gerais na aplicação."
-      },
-      "GENERAL_PREFERENCES": {
-        "ACTIVITY_MESSAGE": "Ative as mensagens de atividade na conversa"
+        "NOTE": "Altera comportamentos gerais na aplicação.",
+        "ACTIVITY_MESSAGE": "Desative as mensagens de atividade na conversa",
+        "SESSION": {
+          "TITLE": "Define o tempo de sessão da aba do navegador",
+          "SESSION_TIMES": {
+            "15": "15 minutos",
+            "30": "30 minutos",
+            "NONE": "Interminável"
+          }
+        }
       },
       "EMAIL_NOTIFICATIONS_SECTION": {
         "TITLE": "Notificações por e-mail",

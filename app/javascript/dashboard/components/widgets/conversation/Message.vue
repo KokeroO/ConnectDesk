@@ -24,6 +24,7 @@ import { getDayDifferenceFromNow } from 'shared/helpers/DateHelper';
 import * as Sentry from '@sentry/vue';
 import { useTrack } from 'dashboard/composables';
 import { emitter } from 'shared/helpers/mitt';
+import { useUISettings } from 'dashboard/composables/useUISettings';
 
 export default {
   components: {
@@ -77,8 +78,10 @@ export default {
   },
   setup() {
     const { formatMessage } = useMessageFormatter();
+    const { uiSettings } = useUISettings();
     return {
       formatMessage,
+      uiSettings,
     };
   },
   data() {
@@ -238,7 +241,9 @@ export default {
       };
     },
     isActivity() {
-      return this.data.message_type === 2;
+      return (
+        this.data.message_type === 2 && this.uiSettings.activity_message_view
+      );
     },
     createdAt() {
       return this.contentAttributes.external_created_at || this.data.created_at;

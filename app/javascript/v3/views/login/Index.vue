@@ -128,6 +128,7 @@ export default {
 
       login(credentials)
         .then(() => {
+          sessionStorage.setItem('last_activity_at', Date.now());
           this.showAlertMessage(this.$t('LOGIN.API.SUCCESS_MESSAGE'));
         })
         .catch(response => {

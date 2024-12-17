@@ -1,6 +1,6 @@
 <script setup>
 import { computed } from 'vue';
-import { ALERT_EVENTS } from './constants';
+import { SESSION_TIMES } from './constants';
 
 const props = defineProps({
   label: {
@@ -9,13 +9,13 @@ const props = defineProps({
   },
   value: {
     type: String,
-    default: 'all',
+    default: '30',
   },
 });
 
 const emit = defineEmits(['update']);
 
-const alertEvents = ALERT_EVENTS;
+const sessionTimes = SESSION_TIMES;
 
 const selectedValue = computed({
   get: () => props.value,
@@ -36,7 +36,7 @@ const selectedValue = computed({
       class="flex flex-row justify-between h-10 p-2 border border-solid rounded-xl border-ash-200"
     >
       <div
-        v-for="option in alertEvents"
+        v-for="option in sessionTimes"
         :key="option.value"
         class="flex flex-row items-center justify-center gap-2 px-4 border-r border-ash-200 grow last:border-r-0"
       >
@@ -56,7 +56,7 @@ const selectedValue = computed({
         >
           {{
             $t(
-              `PROFILE_SETTINGS.FORM.AUDIO_NOTIFICATIONS_SECTION.ALERT_TYPES.${option.label.toUpperCase()}`
+              `PROFILE_SETTINGS.FORM.GENERAL_PREFERENCES_SECTION.SESSION.SESSION_TIMES.${option.label.toUpperCase()}`
             )
           }}
         </label>
